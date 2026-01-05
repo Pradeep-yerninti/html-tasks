@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+         intractive web project
+        </title>
+        <link rel="stylesheet" href="dailyTask.css">
+    </head>
+    <body>
+        <header>
+           <h1 class="line">Intractive Web Project</h1>
+           <nav class="line">
+            <a href="">Home</a>
+             <a href="">Dynamic</a>
+              <a href="">Timer</a>
+               <a href="">Contact Form</a>
+            
+           </nav>
+        </header>
+        <main>
+
+            <!--About This Project Section-->
+            <section>
+                <h2 class="line ma-bt" >About This Project</h2>
+                <div class="about">
+                    <div>
+                    <p class="ma-bt">This is a sample intarctive web page built using HTML and JavaScript.it features dynamic content manuipulation,form valodation and locak storage.</p>
+                   <h3 class="ma-bt">Features Demonstrated:</h3>
+                     <ul class="ull">
+                         <li>DOM manipulation</li>
+                         <li>Form Validation</li>
+                         <li>Event Handling</li>
+                         <li>Dynamic Content -updates</li>
+                         <li>Local Storage</li>
+                     </ul>
+                    </div>
+                    <div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15198.971565620837!2d83.3254949!3d17.756749699999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1767601162698!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <button class="btn">Toggle Map</button>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <section style="display: flex;">
+                <div style="margin-right: 50px;">
+                <h2 class="line ma-bt">Intractive To-Do List</h2>
+                <input type="text" id="taskInput" placeholder="New Task..." style="width:300px;">
+                <button class="btn-i">Add</button>
+                <ul>
+                    <li>Learn HTML <button class="btn-del1">Delete</button></li>
+                    <li>Practice JavaScript <button class="btn-del2">Delete</button></li>
+                    <li>Store data in LocaStorage <button class="btn-del3">Delete</button></li>
+                </ul>
+                </div>
+                <div style="margin-left: 20px;">
+                    <h2 class="line mb-bt">Auto-Updating Timmer</h2>
+                    <p class="mb-mt">This Counter auto-updates every second.</p>
+                    <div style="text-align: center;">
+                        <h3 class="mb-mt">Time elapsed:00:00:08</h3>
+                        <button class="btn-r">Pause Timmer</button>
+                        <button class="btn-r">Resset Timmer</button>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+            <section style="display: flex;">
+                <div>
+                <div>
+                    <p class="bg-h ma-bt">Tasks are saved in your browser local storage</p>
+                    <div style="display: flex;
+    justify-content: center;"><button class="btn-c ma-bt">Clear All Tasks</button></div>
+                </div>
+                <div>
+                    <h2 class="line ma-bt">Auto-Updating Timmer</h2>
+                    <p class="ma-bt">This Counter auto-updates every second.</p>
+                    <div style="text-align: center;">
+                        <h3 class="ma-bt">Time elapsed:00:00:08</h3>
+                        <button class="btn-r">Pause Timmer</button>
+                        <button class="btn-r">Resset Timmer</button>
+                    </div>
+                </div>
+                </div>
+                <div style="margin-left: 170px; width: 500px">
+                    <h2 class="line ma-bt">Contact Form</h2>
+                    <form>  
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                        <p class="error">please enter your name</p><br><br>
+                        
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                        <p class="error">please enter your email</p><br><br>
+                         <label for="password">Password:</label>
+                         <input type="password" id="password" name="password" required>
+                         <p class="error">password must be at least 6 characters</p><br><br>
+                        <label for="message">Message:</label><br>
+                        <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+                        
+                    
+                    </form>    
+                </div>
+                </section>
+
+
+
+                <section>
+                    <div style="display: flex;">
+                        <div>
+                            <h2 class="line ma-bt">Feat Hesions & Videos</h2>
+                    
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15198.971565620837!2d83.3254949!3d17.756749699999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1767601162698!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <button class="btn">Toggle Map</button>
+                    </div>
+                    <div class="map-container">
+                        <input type="checkbox" id="subscribe" name="subscribe"><label for="subscribe">Subscribe to Newsletter</label>
+        <input type="checkbox" id="Yes" name="Yes"><label for="Yes"> Yes </label>
+        <input type="checkbox" id="No" name="No"><label for="No"> No </label><br><br>
+        <label for="contact-time">Preferred Contact Time:</label>
+        <input type="checkbox" id="Email" name="Email"><label for="Email"> Email </label>
+        <input type="checkbox" id="Phone" name="Phone"><label for="Phone"> Phone </label><br><br>
+        <button>clear Data</button>
+        <p class="succ">your Information is saved in this browser</p>
+                    </div>
+                    </div>
+                </section>
+        </main>
+
+        <!--Footer-->
+<footer style="text-align: center;" class="line2">
+    <p class="ma-bt">&copy; 2024 <b>Intractive Web Project</b>.| Your Email <a href=""> contact@example.com</a></p>
+    <p><a href="">Privacy Policy</a>|<a href=""> Terms of Service</a></p>
+</footer>
+    </body>
+</html>
