@@ -1,0 +1,107 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+header{
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.line{
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+
+}
+.about{
+    display: flex;
+    justify-content: space-between;
+}
+.ull{
+    list-style-type: disc;
+    margin-left: 30px;
+    line-height: 1.6;
+}
+section iframe{
+    margin-top: 10px;
+    height: 250px;
+    width: 400px;
+}
+.ma-bt{
+    margin-bottom: 22px;
+}
+.btn{
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 1px solid skyblue;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 400px;
+}
+.btn-i{
+    margin-top: 10px;
+    width: 60px;
+    background-color: steelblue;
+    color: white;
+    border:1px solid steelblue;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 3px;
+}
+.btn-del1{
+    margin-left: 220px;
+}
+.btn-del2{
+    margin-left: 200px;
+}
+.btn-del3{
+    margin-left: 150px;
+}
+.btn-r{
+     margin-top: 10px;
+    background-color: steelblue;
+    color: white;
+    border:1px solid steelblue;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 3px;
+}
+.bg-h{
+    background-color: lightyellow;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 20px;
+}
+.btn-c{
+    padding:5px;
+    background-color: transparent;
+    border: 1px solid skyblue;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+.error {
+  color: #d9534f;
+  font-size: 12px;
+  margin-left: 42px;
+}
+
+.map-container{
+    margin-top: 40px;
+}
+.succ {
+  color:lightgreen;
+  font-size: 12px;
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+}
+.line2{
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+
+}
