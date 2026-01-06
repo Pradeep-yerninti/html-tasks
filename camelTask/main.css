@@ -1,0 +1,141 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Georgia, serif;
+}
+
+/* HEADER */
+.header {
+  background: #eee;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.social a {
+  margin-left: 10px;
+  font-size: 16px;
+    color:black;
+}
+
+/* LAYOUT */
+.container {
+  display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  border-right: 1px solid #ccc;
+  padding: 15px;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.menu {
+  list-style: none;
+  margin: 20px 0;
+}
+
+.menu li {
+  padding: 10px;
+}
+
+ .active {
+  background: #87e6e0;
+  color: white;
+}
+
+.quote {
+  margin-top: 70px;
+  font-style: italic;
+  font-size: 14px;
+}
+
+/* CONTENT */
+.content {
+  padding: 25px;
+}
+
+.content h2 {
+  margin-bottom: 10px;
+}
+
+.content p {
+  margin-bottom: 20px;
+}
+
+hr {
+  margin: 20px 0;
+}
+
+/* SKILLS TABLE */
+.skills {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.skills th {
+  background: #87e6e0;
+  padding: 10px;
+  border: 1px solid #ccc;
+    font-size: 14px;
+    color:#eee;
+}
+
+.skills td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+}
+
+.skill-icons td {
+  font-size: 20px;
+  text-align: center;
+}
+
+/* FORM */
+.form {
+  margin-top: 30px;
+}
+.form label {
+  width: 60px;
+
+}
+
+.form input {
+  width: 200px;
+  margin-bottom: 5px;
+}
+
+.form textarea {
+  width: 260px;
+  height: 80px;
+  display: block;
+  margin: 10px 0;
+}
+
+.form button {
+  padding: 4px 10px;
+}
+
+/* FOOTER */
+.footer {
+  background: #2e3555;
+  color: white;
+  text-align: center;
+  padding: 40px;
+}
