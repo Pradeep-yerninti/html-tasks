@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel - Break System</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<h2 class="header">
+    Admin Dashboard
+    <button class="logout" onclick="logout()">Logout</button>
+</h2>
+
+<div class="card">
+    <h3>Add User</h3>
+    <input id="uname" placeholder="Username">
+    <input id="upass" placeholder="Password">
+    <button class="add-btn" onclick="addUser()">Add User</button>
+</div>
+
+<div class="card">
+    <h3>Users Status</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Break Type</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="userTable"></tbody>
+    </table>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

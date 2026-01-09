@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard - Break System</title>
+    <link rel="stylesheet" href="user.css">
+</head>
+<body>
+
+<h2>User Dashboard</h2>
+
+<div class="card">
+    <h3>Employees Overview</h3>
+    <p id="stats"></p>
+</div>
+
+<div class="card">
+    <h3>Break Management</h3>
+
+    <select id="breakType">
+        <option value="Regular">Regular</option>
+        <option value="Lunch">Lunch</option>
+    </select>
+
+    <div class="btn-group">
+        <button class="start" onclick="startBreak()">Start Break</button>
+        <button class="end" onclick="endBreak()">End Break</button>
+    </div>
+
+    <p id="breakStatus"></p>
+</div>
+
+<script src="user.js"></script>
+</body>
+</html>
