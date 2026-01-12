@@ -1,0 +1,76 @@
+
+.gradient-custom-2 {
+/* fallback for old browsers */
+background: #fccb90;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, #ee7724,#DE7834 0%,
+    #F09861 50%,
+    #EBAF90 100%);
+
+background: linear-gradient(
+    90deg,
+    #DE7834 0%,
+    #F09861 50%,
+    #EBAF90 100%
+);
+
+}
+input,
+.role-select {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+    background: #f8fafc;
+    transition: all 0.3s ease;
+}
+input:focus,
+.role-select:focus {
+    outline: none;
+    border-color: #6366f1;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+.role-select {
+    appearance: none;
+    background-image:
+        linear-gradient(45deg, transparent 50%, #64748b 50%),
+        linear-gradient(135deg, #64748b 50%, transparent 50%);
+    background-position:
+        calc(100% - 18px) calc(50% - 4px),
+        calc(100% - 12px) calc(50% - 4px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+}
+/* ERROR MESSAGE */
+.error {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 14px;
+    color: #ef4444;
+}
+
+/* SUCCESS MESSAGE */
+.success {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 14px;
+    color: #22c55e;
+    font-weight: 600;
+}
+
+
+@media (min-width: 768px) {
+.gradient-form {
+height: 100vh !important;
+}
+}
+@media (min-width: 769px) {
+.gradient-custom-2 {
+border-top-right-radius: .3rem;
+border-bottom-right-radius: .3rem;
+}
+}

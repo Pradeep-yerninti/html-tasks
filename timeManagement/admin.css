@@ -1,68 +1,209 @@
-
+/* ===== RESET ===== */
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Arial, sans-serif;
 }
 
+/* ===== BODY BACKGROUND (YOUR GRADIENT) ===== */
 body {
-    margin: 0;
     min-height: 100vh;
-    padding: 30px;
-    background: linear-gradient(135deg, #2b1055, #7597de);
-    color: #e5e7eb;
+    background: #fccb90;
+    background: -webkit-linear-gradient(
+        to right,
+        #ee7724,
+        #DE7834 0%,
+        #F09861 50%,
+        #EBAF90 100%
+    );
+    background: linear-gradient(
+        90deg,
+        #DE7834 0%,
+        #F09861 50%,
+        #EBAF90 100%
+    );
+    color: #1f2933;
+}
+
+/* ===== TOP BAR ===== */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
+}
+
+.logo img {
+    width: 140px;
 }
 
 .header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    gap: 20px;
+    color: #fff;
 }
 
-.card {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    margin-bottom: 25px;
-    border-radius: 14px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
-h3 {
-    margin-top: 0;
-    color: #c7d2fe;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    font-size: 14px;
-}
-
-.add-btn {
-    background: linear-gradient(135deg, #22c55e, #16a34a);
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 5px;
-}
-
+/* ===== LOGOUT BUTTON ===== */
 .logout {
     background: linear-gradient(135deg, #ef4444, #b91c1c);
     border: none;
-    padding: 8px 14px;
+    padding: 8px 16px;
     border-radius: 8px;
     color: white;
     cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
+.logout:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* ===== LAYOUT ===== */
+.container {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 25px;
+    padding: 25px;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    background: rgba(0,0,0,0.45);
+    border-radius: 16px;
+    padding: 20px;
+    color: #fff;
+}
+
+.image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 12px;
+    border: 4px solid #fff;
+}
+
+.sidebar p {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* ===== MENU ===== */
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.menu li i {
+    font-size: 18px;
+    min-width: 22px;
+    transition: transform 0.3s ease;
+}
+
+.menu li p {
+    font-size: 15px;
+}
+
+/* 🔥 Hover Effect */
+.menu li:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateX(6px);
+}
+
+.menu li:hover i {
+    transform: scale(1.2);
+    color: #1f2933;
+}
+
+.menu li:hover p {
+    color: #1f2933;
+    font-weight: 600;
+}
+
+/* ===== CARD (YOUR GRADIENT) ===== */
+.card {
+    background: #fccb90;
+    background: -webkit-linear-gradient(
+        to right,
+        #ee7724,
+        #DE7834 0%,
+        #F09861 50%,
+        #EBAF90 100%
+    );
+    background: linear-gradient(
+        90deg,
+        #DE7834 0%,
+        #F09861 50%,
+        #EBAF90 100%
+    );
+    padding: 22px;
+    border-radius: 18px;
+    margin-bottom: 25px;
+    box-shadow: 0 25px 45px rgba(0,0,0,0.35);
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    color: #1f2933;
+}
+
+/* ===== INPUTS ===== */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+}
+
+/* ===== BUTTONS ===== */
+.add-btn {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.btn-csv {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 6px 0;
+}
+
+/* ===== TABLE ===== */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -75,24 +216,26 @@ th, td {
 }
 
 th {
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.5);
     color: #fff;
 }
 
 tr:nth-child(even) {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.25);
 }
 
+/* ===== STATUS COLORS ===== */
 .green {
-    color: #22c55e;
+    color: #15803d;
     font-weight: bold;
 }
 
 .red {
-    color: #f87171;
+    color: #b91c1c;
     font-weight: bold;
 }
 
+/* ===== TABLE ACTION BUTTONS ===== */
 td button {
     background: #ef4444;
     border: none;
@@ -100,7 +243,31 @@ td button {
     padding: 6px 10px;
     border-radius: 6px;
     cursor: pointer;
+    margin: 3px;
+    font-size: 13px;
+    transition: 0.3s;
 }
+
 td button:hover {
-    opacity: 0.9;
+    opacity: 0.85;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    margin-top: 20px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+    }
 }

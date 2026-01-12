@@ -1,56 +1,24 @@
-
-// 🔐 Admin protection - Only one admin user can access
+// 🔐 Admin protection
 if (localStorage.getItem("role") !== "admin") {
-    window.location.href = "login.html";
-}
-
-// Verify that the logged-in admin matches the stored admin user
-let adminData = JSON.parse(localStorage.getItem("admin"));
-let currentAdminUser = localStorage.getItem("currentAdminUser");
-
-if (!adminData || !currentAdminUser || currentAdminUser !== adminData.username) {
-    // Unauthorized admin access attempt
-    localStorage.removeItem("role");
-    localStorage.removeItem("currentAdminUser");
-    window.location.href = "login.html";
+    window.location.href = "guest1.html";
 }
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
+let alertedUsers = new Set();
 
+// Show admin name
+document.getElementById("adminName").innerText =
+    localStorage.getItem("currentAdminUser");
 
-function renderUsers() {
-    let html = "";
-
-    users.forEach((u, i) => {
-        html += `
-        <tr>
-            <td>${u.username}</td>
-            <td>${u.role || "USER"}</td>
-            <td class="${u.status === "ONLINE" ? "green" : "red"}">
-                ${u.status}
-            </td>
-            <td>${u.breakType || "-"}</td>
-            <td>
-                <button onclick="deleteUser(${i})">Delete</button>
-            </td>
-        </tr>`;
-    });
-
-    document.getElementById("userTable").innerHTML = html;
-    localStorage.setItem("users", JSON.stringify(users));
-}
-
-// 🔄 Auto refresh
-setInterval(() => {
-    users = JSON.parse(localStorage.getItem("users")) || [];
-    renderUsers();
-}, 2000);
-
+/* ========= ADD USER ========= */
 function addUser() {
-    const username = document.getElementById("uname").value.trim();
-    const password = document.getElementById("upass").value.trim();
+    const username = uname.value.trim();
+    const password = upass.value.trim();
 
-    if (!username || !password) return;
+    if (!username || !password) {
+        alert("Enter username and password");
+        return;
+    }
 
     if (users.some(u => u.username === username)) {
         alert("User already exists");
@@ -62,23 +30,124 @@ function addUser() {
         password,
         role: "USER",
         status: "ONLINE",
-        breakType: null
+        breakType: null,
+        breakStart: null,
+        lunchExceeded: false
     });
 
-    document.getElementById("uname").value = "";
-    document.getElementById("upass").value = "";
+    uname.value = "";
+    upass.value = "";
 
-    renderUsers();
+    save();
 }
 
+/* ========= RENDER USERS ========= */
+function renderUsers(list = users) {
+    let html = "";
+
+    list.forEach((u, index) => {
+        let breakTime = "-";
+
+        if (u.status === "AWAY" && u.breakStart) {
+            const mins = Math.floor((Date.now() - u.breakStart) / 60000);
+            breakTime = `${mins} min`;
+
+            if (mins >= 60 && !alertedUsers.has(u.username)) {
+                alert(`⚠️ ALERT: ${u.username} exceeded 1 hour break`);
+                alertedUsers.add(u.username);
+                u.lunchExceeded = true;
+            }
+        }
+
+        html += `
+        <tr>
+            <td>${u.username}</td>
+            <td class="${u.status === "ONLINE" ? "green" : "red"}">${u.status}</td>
+            <td>${u.breakType || "-"}</td>
+            <td>${breakTime}</td>
+            <td>${u.lunchExceeded ? "⏰ Exceeded" : "-"}</td>
+            <td>
+                ${u.status === "AWAY"
+                    ? `<button onclick="forceActive(${index})">Toggle</button>`
+                    : ""
+                }
+                <button onclick="editUser(${index})">Edit</button>
+                <button onclick="deleteUser(${index})">Delete</button>
+            </td>
+        </tr>`;
+    });
+
+    userTable.innerHTML = html;
+}
+
+/* ========= FORCE ACTIVE ========= */
+function forceActive(index) {
+    users[index].status = "ONLINE";
+    users[index].breakType = null;
+    users[index].breakStart = null;
+    users[index].lunchExceeded = false;
+    alertedUsers.delete(users[index].username);
+    save();
+}
+
+/* ========= EDIT USER ========= */
+function editUser(index) {
+    const newName = prompt("Enter new username:", users[index].username);
+    if (!newName) return;
+
+    if (users.some((u, i) => u.username === newName && i !== index)) {
+        alert("Username already exists");
+        return;
+    }
+
+    users[index].username = newName;
+    save();
+}
+
+/* ========= DELETE USER ========= */
 function deleteUser(index) {
+    if (!confirm("Delete this user?")) return;
     users.splice(index, 1);
+    save();
+}
+
+/* ========= SEARCH USERS ========= */
+function searchUsers() {
+    const q = searchUser.value.toLowerCase();
+    renderUsers(users.filter(u => u.username.toLowerCase().includes(q)));
+}
+
+/* ========= CSV DOWNLOAD ========= */
+function downloadCSV() {
+    let csv = "Username,Status,BreakType\n";
+    users.forEach(u => {
+        csv += `${u.username},${u.status},${u.breakType || ""}\n`;
+    });
+
+    const blob = new Blob([csv], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "break-report.csv";
+    link.click();
+}
+
+/* ========= SAVE ========= */
+function save() {
+    localStorage.setItem("users", JSON.stringify(users));
     renderUsers();
 }
 
+/* ========= LOGOUT ========= */
 function logout() {
-    localStorage.clear();
-    window.location.href = "login.html";
+    localStorage.removeItem("role");
+    localStorage.removeItem("currentAdminUser");
+    window.location.href = "guest1.html";
 }
+
+/* ========= AUTO REFRESH ========= */
+setInterval(() => {
+    users = JSON.parse(localStorage.getItem("users")) || [];
+    renderUsers();
+}, 2000);
 
 renderUsers();

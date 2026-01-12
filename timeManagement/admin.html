@@ -1,40 +1,76 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Panel - Break System</title>
+    <title>Admin Dashboard - Break System</title>
     <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-<h2 class="header">
-    Admin Dashboard
-    <button class="logout" onclick="logout()">Logout</button>
-</h2>
+<header class="topbar">
+    <div class="logo">
+        <img src="https://oppty.in/wp-content/uploads/2025/07/oppty.png" alt="logo">
+    </div>
 
-<div class="card">
-    <h3>Add User</h3>
-    <input id="uname" placeholder="Username">
-    <input id="upass" placeholder="Password">
-    <button class="add-btn" onclick="addUser()">Add User</button>
-</div>
+    <h2 class="header">
+        Admin Dashboard
+        <button class="logout" onclick="logout()">Logout</button>
+    </h2>
+</header>
 
-<div class="card">
-    <h3>Users Status</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Break Type</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="userTable"></tbody>
-    </table>
-</div>
+<main class="container">
+    <aside class="sidebar">
+        <img src="https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg" class="image">
+        <p id="adminName"></p>
+
+        <ul class="menu">
+            <li><i class="fa-solid fa-user"></i><p>Account</p></li>
+            <li><i class="fa-solid fa-phone"></i><p>Contact</p></li>
+            <li><i class="fa-solid fa-location-dot"></i><p>Location</p></li>
+            <li><i class="fa-solid fa-cog"></i><p>Settings</p></li>
+            <li><i class="fa-solid fa-lock"></i><p>Privacy</p></li>
+        </ul>
+    </aside>
+
+    <section class="content">
+
+        <div class="card">
+            <h3>Add User</h3>
+            <input id="uname" placeholder="Username">
+            <input id="upass" placeholder="Password">
+            <button class="add-btn" onclick="addUser()">Add User</button>
+        </div>
+
+        <div class="card">
+            <h3>Users Status</h3>
+
+            <input id="searchUser" placeholder="Search username..." onkeyup="searchUsers()">
+
+            <!-- ✅ ADDITION -->
+            <button class="btn-csv" onclick="downloadCSV()">Download CSV</button>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Status</th>
+                        <th>Break Type</th>
+                        <th>Break Time</th>
+                        <th>Alert</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="userTable"></tbody>
+            </table>
+        </div>
+
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Oppty Tech Hub. All rights reserved.</p>
+</footer>
 
 <script src="admin.js"></script>
 </body>
