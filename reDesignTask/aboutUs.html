@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aboutUs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="aboutUs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex items-center justify-between">
+        <!-- Left: Logo -->
+        <div class="flex items-center">
+            <div class="logo-container cursor-pointer">
+                <img src="./images/ChatGPT Image Jan 13, 2026, 01_30_06 PM.png" style="border-radius: 10px;" class="logo" alt="Oppty Logo" onerror="this.src='https://via.placeholder.com/150x50/6366f1/ffffff?text=OPPTY'">
+            </div>
+        </div>
+
+        <!-- Right: Social, Buttons & Hamburger -->
+        <div class="flex items-center space-x-6">
+            <!-- Social Icons -->
+            <div class="hidden lg:flex items-center space-x-4 border-r border-slate-700 pr-6 mr-2">
+                <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="tel:+0123456789" class="social-icon"><i class="fa-solid fa-phone"></i></a>
+            </div>
+
+            <!-- Academy and Training Buttons -->
+            <div class="hidden sm:flex items-center space-x-3">
+                <a href="http://127.0.0.1:5500/academy.html"><button class="btn-action bg-indigo-600 text-white hover:bg-indigo-500 shadow-lg shadow-indigo-500/25">Academy</button></a>
+                <button class="btn-action border-2 border-indigo-500 text-indigo-400 hover:bg-indigo-500 hover:text-white">Training</button>
+            </div>
+
+            <!-- Hamburger Icon -->
+            <button id="menu-toggle" class="text-2xl text-white hover:text-indigo-400 p-2 flex items-center justify-center">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Side Navigation Menu -->
+    <div id="overlay" class="overlay"></div>
+    <div id="mobile-menu">
+        <div class="menu-close" id="menu-close">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        
+         <a href="http://127.0.0.1:5500/index.html"><div class="menu-link">Home</div></a> 
+        <a href="http://127.0.0.1:5500/aboutUs.html"><div class="menu-link">About Us</div></a>
+        
+        <!-- Services with Dropdown -->
+        <a href="http://127.0.0.1:5500/sevices.html"><div id="services-parent" class="menu-link flex justify-between items-center">
+            Services <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="chevron"></i>
+        </div></a>
+        <div class="dropdown-container" id="services-dropdown">
+            <a href="http://127.0.0.1:5500/solutions.html" class="sub-link">Solutions</a>
+            <a href="#" class="sub-link"></a>
+            <a href="#" class="sub-link"></a>
+        </div>
+
+        <a href="http://127.0.0.1:5500/contact.html"><div class="menu-link">Contact Us</div></a>
+        <a href="http://127.0.0.1:5500/careers.html"><div class="menu-link">Careers</div></a>
+
+        <!-- Footer inside menu -->
+        <div id="menu-footer" class="mt-auto transition-all duration-700 opacity-0 translate-y-10">
+            <p class="text-slate-500 text-sm mb-4"></p>
+            <div class="flex space-x-4">
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+      <div id="canvas-container"></div>
+
+    <main class="relative z-10 min-h-screen grid grid-cols-1 md:grid-cols-2 items-center px-6 md:px-20">
+        <div class="flex flex-col justify-center h-full">
+            <div id="content-area" class="max-w-xl content-transition pointer-events-auto py-12">
+                <div id="slide-number" class="text-blue-400 font-mono text-xl mb-4 font-bold"></div>
+                <h1 id="title" class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight tracking-tighter bg-gradient-to-r from-white via-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    BPO
+                </h1>
+                <p id="description" class="text-xl text-slate-400 mb-8 max-w-lg leading-relaxed">
+                    Streamlining your business operations with high-efficiency outsourcing solutions. We handle the complexity so you can focus on core growth.
+                </p>
+            </div>
+        </div>
+
+        <div class="hidden md:block pointer-events-none h-full"></div>
+
+        <div class="absolute bottom-12 left-6 md:left-20 flex items-center space-x-6 z-20 pointer-events-auto">
+            <button onclick="prevSlide()" class="p-4 rounded-full glass-card hover:bg-slate-700 transition-all text-slate-300">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            
+            <div id="dots" class="flex space-x-2"></div>
+
+            <button onclick="nextSlide()" class="p-4 rounded-full glass-card hover:bg-slate-700 transition-all text-slate-300">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+        </div>
+    </main>
+    <section class="max-w-7xl mx-auto my-20 px-4">
+        <!-- Main Container with dark background to blend with body -->
+        <div class="flex flex-col lg:flex-row items-center gap-16 py-16 px-8 bg-slate-900/50 rounded-3xl shadow-2xl  border-slate-800 overflow-hidden">
+            
+            <!-- Left Side: 3D Logos -->
+            <div class="w-full lg:w-1/2 flex justify-center items-center py-24  rounded-2xl relative">
+                <!-- Decorative background glow -->
+                <div class="absolute inset-0 opacity-20 pointer-events-none">
+                    <div class="absolute top-0 left-0 w-40 h-40 bg-indigo-500 rounded-full blur-[100px]"></div>
+                    <div class="absolute bottom-0 right-0 w-40 h-40 bg-blue-500 rounded-full blur-[100px]"></div>
+                </div>
+
+                <div class="scene">
+                    <div class="carousel">
+                        <!-- Logo 1: HCL -->
+                        <div class="carousel__cell">
+                            <img src="https://oppty.in/wp-content/uploads/2025/07/o9-150x150.png" 
+                                 alt="HCL" onerror="this.outerHTML='<span class=\'img-fallback\'>HCL Tech</span>'">
+                        </div>
+                        <!-- Logo 2: IBM -->
+                        <div class="carousel__cell">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/2560px-IBM_logo.svg.png" 
+                                 alt="IBM" onerror="this.outerHTML='<span class=\'img-fallback\'>IBM</span>'">
+                        </div>
+                        <!-- Logo 3: Infotech -->
+                        <div class="carousel__cell">
+                            <img src="https://oppty.in/wp-content/uploads/2025/07/o3-150x150.png" 
+                                 alt="Infotech" onerror="this.outerHTML='<span class=\'img-fallback\'>Infotech</span>'">
+                        </div>
+                        <!-- Logo 4: FoundIt -->
+                        <div class="carousel__cell">
+                            <img src="https://oppty.in/wp-content/uploads/2025/07/o1-150x150.png" 
+                                 alt="FoundIt" onerror="this.outerHTML='<span class=\'img-fallback\'>FoundIt</span>'">
+                        </div>
+                        <!-- Logo 5: Genpact -->
+                        <div class="carousel__cell">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Genpact_logo.svg/2560px-Genpact_logo.svg.png" 
+                                 alt="Genpact" onerror="this.outerHTML='<span class=\'img-fallback\'>Genpact</span>'">
+                        </div>
+                        <!-- Logo 6: Hetero -->
+                        <div class="carousel__cell">
+                            <img src="https://oppty.in/wp-content/uploads/2025/07/o5-150x150.png" 
+                                 alt="Hetero" onerror="this.outerHTML='<span class=\'img-fallback\'>Hetero</span>'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Content -->
+            <div class="w-full lg:w-1/2 space-y-8">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">
+                   Our Valued Clients
+                </h2>
+                <p class="text-lg text-slate-400 leading-relaxed">
+                    Our ecosystem is built on trust and shared innovation. By collaborating with industry giants across IT services, digital transformation, and healthcare, we ensure that our clients receive integrated, high-performance solutions tailored to the modern landscape.
+                </p>
+                <p class="text-lg text-slate-400 leading-relaxed">
+                    Through these strategic alliances, we leverage world-class expertise to solve complex challenges and drive sustainable growth for businesses worldwide.
+                </p>
+            </div>
+
+        </div>
+    </section>
+    <!-- Technology Solutions Section -->
+    <section class="relative h-auto min-h-screen flex items-center justify-center py-20 overflow-hidden">
+        <!-- Background Video -->
+        <div class="video-docker absolute top-0 left-0 w-full h-full overflow-hidden">
+            <video class="absolute object-cover w-full h-full opacity-50" 
+                   src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-pills-and-data-nodes-32863-large.mp4" 
+                   type="video/mp4" autoplay muted loop playsinline></video>
+        </div>
+
+        <!-- Content Overlay -->
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
+                    <span class="gradient-text">Innovative Solutions</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                    Empowering your business with cutting-edge technology and global service excellence.
+                </p>
+            </div>
+
+            <!-- Technology Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 perspective-container">
+                
+                <!-- Card 1: BPO -->
+                <div class="glass-card delay-1 p-8 rounded-2xl text-white flex flex-col items-center text-center">
+                    <div class="icon-container w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-headset text-3xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">BPO Services</h3>
+                    <p class="text-gray-300 leading-relaxed text-sm">
+                        Streamline your operations with our high-efficiency Business Process Outsourcing. We handle customer support, back-office tasks, and data management so you can focus on core growth.
+                    </p>
+                </div>
+
+                <!-- Card 2: E-Commerce -->
+                <div class="glass-card delay-2 p-8 rounded-2xl text-white flex flex-col items-center text-center">
+                    <div class="icon-container w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-shopping-cart text-3xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">E-Commerce</h3>
+                    <p class="text-gray-300 leading-relaxed text-sm">
+                        End-to-end digital commerce solutions designed to scale. From custom storefront development to secure payment integrations, we help you dominate the online marketplace.
+                    </p>
+                </div>
+
+                <!-- Card 3: IT Services -->
+                <div class="glass-card delay-3 p-8 rounded-2xl text-white flex flex-col items-center text-center">
+                    <div class="icon-container w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-laptop-code text-3xl text-green-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">IT Services</h3>
+                    <p class="text-gray-300 leading-relaxed text-sm">
+                        Comprehensive IT management including cloud infrastructure, cybersecurity, and software maintenance. We ensure your technology stack is robust, secure, and always-on.
+                    </p>
+                </div>
+
+                <!-- Card 4: AI Solutions -->
+                <div class="glass-card delay-4 p-8 rounded-2xl text-white flex flex-col items-center text-center">
+                    <div class="icon-container w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-brain text-3xl text-red-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">AI Solutions</h3>
+                    <p class="text-gray-300 leading-relaxed text-sm">
+                        Harness the power of Artificial Intelligence to automate complex workflows, predict market trends, and deliver personalized user experiences through advanced machine learning.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<!--Awards -->
+ <section id="awards-component" class="py-16 px-4 max-w-7xl mx-auto">
+        <!-- Section Header -->
+        <div id="section-header" class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 uppercase tracking-widest">Honors & Accolades</h2>
+            <div class="h-1.5 w-24 bg-blue-500 mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Awards Grid -->
+        <div id="awards-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch">
+            
+            <!-- Award Card 1 -->
+            <div class="award-card animate-float delay-1 bg-slate-800/50 rounded-3xl overflow-hidden shadow-sm border border-slate-700 flex flex-col card-transition">
+                <div class="award-image-container">
+                    <img src="https://oppty.in/wp-content/uploads/2025/08/image-removebg-preview.png" 
+                         alt="Innovation Excellence Award" 
+                         class="award-image"
+                         onerror="this.src='https://via.placeholder.com/600x400?text=Innovation+Award'">
+                </div>
+                <div class="p-8 flex flex-col items-center text-center flex-grow">
+                    <h3 class="text-xl font-bold text-white mb-3">BPO Excellence Recognition</h3>
+                    <p class="text-slate-300 mb-6 leading-relaxed text-sm">We earned praise for efficient, client-focused BPO services that boost productivity.</p>
+                    <button onclick="toggleContent()" class="mt-auto px-8 py-2.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-500 transition-colors shadow-lg shadow-blue-900/20">
+                        Know More
+                    </button>
+                </div>
+            </div>
+
+            <!-- Award Card 2 -->
+            <div class="award-card animate-float delay-2 bg-slate-800/50 rounded-3xl overflow-hidden shadow-sm border border-slate-700 flex flex-col card-transition">
+                <div class="award-image-container">
+                    <img src="https://oppty.in/wp-content/uploads/2023/09/award-img-01.png" 
+                         alt="Industry Leader Award" 
+                         class="award-image"
+                         onerror="this.src='https://via.placeholder.com/600x400?text=Industry+Award'">
+                </div>
+                <div class="p-8 flex flex-col items-center text-center flex-grow">
+                    <h3 class="text-xl font-bold text-white mb-3">Technology Innovation Award</h3>
+                    <p class="text-slate-300 mb-6 leading-relaxed text-sm">Oppty TechHub was awarded for pioneering AI and IT solutions, driving digital transformation.</p>
+                    <button onclick="toggleContent()" class="mt-auto px-8 py-2.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-500 transition-colors shadow-lg shadow-blue-900/20">
+                        Know More
+                    </button>
+                </div>
+            </div>
+
+            <!-- Award Card 3 -->
+            <div class="award-card animate-float delay-3 bg-slate-800/50 rounded-3xl overflow-hidden shadow-sm border border-slate-700 flex flex-col card-transition">
+                <div class="award-image-container">
+                    <img src="https://oppty.in/wp-content/uploads/2023/09/award-img-03.png" 
+                         alt="Skill Enabler Award" 
+                         class="award-image"
+                         onerror="this.src='https://via.placeholder.com/600x400?text=Skill+Award'">
+                </div>
+                <div class="p-8 flex flex-col items-center text-center flex-grow">
+                    <h3 class="text-xl font-bold text-white mb-3">E-commerce Leadership Award</h3>
+                    <p class="text-slate-300 mb-6 leading-relaxed text-sm">Our innovative e-commerce platforms were recognized for fueling online business growth.</p>
+                    <button onclick="toggleContent()" class="mt-auto px-8 py-2.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-500 transition-colors shadow-lg shadow-blue-900/20">
+                        Know More
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Content Section -->
+        <div id="detailed-content" class="hidden opacity-0 transform translate-y-8 transition-all duration-500 max-w-4xl mx-auto">
+            <div class="bg-slate-800 p-8 md:p-16 rounded-[3rem] shadow-2xl border border-slate-700 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-bl-full -mr-16 -mt-16"></div>
+                
+                <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-8">Our Commitment to Excellence</h3>
+                
+                <div class="space-y-6 text-slate-300 text-lg leading-relaxed">
+                    <p class="font-medium text-blue-400">
+                        Oppty TechHub is a trailblazer in delivering innovative, client-centric solutions that redefine business success in the digital era.
+                    </p>
+                    <p>
+                        From cutting-edge IT services and AI-driven automation to seamless BPO, e-commerce, and web development, we empower organizations to thrive in a competitive landscape. Through our sub-brand, <span class="font-bold text-white">ProCareer.tech</span>, we bridge the gap between academia and industry by equipping students with essential skills and connecting top talent with leading companies across India.
+                    </p>
+                    <p>
+                        Our unwavering commitment to excellence, collaboration, and integrity ensures we create lasting partnerships, driving sustainable growth and transformative outcomes for businesses and individuals alike.
+                    </p>
+                </div>
+
+                <button onclick="toggleContent()" class="mt-12 inline-flex items-center px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-2xl transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    Back to Awards
+                </button>
+            </div>
+        </div>
+    </section>
+
+     <footer class="footer">
+        <div class="footer-box brand reveal">
+            <!-- Oppty Logo -->
+            <img src="./images/ChatGPT Image Jan 13, 2026, 01_30_06 PM.png"
+                 class="logo" style="border-radius: 10px;"
+                 alt="Oppty Logo"
+                 onerror="this.src='https://oppty.in/wp-content/uploads/2025/09/Oppty-Logo-1.png'">
+            <p>
+                Power up your success with innovative IT, BPO, E-commerce, Web Development, and AI solutions tailored to your vision.
+            </p>
+
+            <div class="newsletter">
+                <input type="email" placeholder="Your Email">
+                <button>Sign Up</button>
+            </div>
+        </div>
+
+        <div class="footer-box reveal">
+            <h3>HYDERABAD LOCATIONS</h3>
+            <ul>
+                <li><i class="fa fa-location-dot"></i> <span>Hyderabad - Flat number 601,<br>
+                    Mahitha’s green galaxy, CBCID <br>Colony,
+                    NRSA Colony, Bagath Singh Nagar Phase 2,
+                    Kukatpally, Hyderabad,
+                    Telangana 500085</span></li>
+                <li><i class="fa fa-envelope"></i> info@oppty.in</li>
+                <li><i class="fa fa-phone"></i> +91 012 345 6789</li>
+            </ul>
+
+            <div class="social">
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-linkedin-in"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+        </div>
+        
+        <div class="footer-box reveal">
+            <h3>UDAIPUR LOCATIONS</h3>
+            <ul>
+                <li><i class="fa fa-location-dot"></i> <span>Udaipur - Plot No: 26, 100 Feet <br>Rd,
+                    Shobhagpura, Udaipur,<br>
+                    Rajasthan 313011</span></li>
+            </ul>
+        </div>
+
+        <div class="footer-box reveal">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>Home</li>
+                <li>About Us</li>
+                <li>Our Services</li>
+                <li>Contact</li>
+                <li>Careers</li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Certification Section -->
+    <div class="cert-section reveal">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png"
+             alt="MSME" onerror="this.style.display='none'">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/Ministry-for-Corporate-AffairS-1-removebg-preview.png" 
+             alt="MCA" onerror="this.style.display='none'">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/36662669-1685562943668-bf31f5769c66e.jpg" 
+             alt="Startup India" onerror="this.style.display='none'">
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="copyright">
+        ©2025 Oppty. All Rights Reserved.
+    </div>
+    <script src="aboutUs.js"></script>
+</body>
+</html>

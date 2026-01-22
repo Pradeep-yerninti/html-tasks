@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpptyTechHub-Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="academy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center">
+            <div class="logo-container cursor-pointer">
+                <img src="./images/ChatGPT Image Jan 13, 2026, 01_30_06 PM.png" style="border-radius: 8px;"class="logo" alt="Oppty Logo" onerror="this.src='https://via.placeholder.com/150x50/6366f1/ffffff?text=OPPTY'">
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-6">
+            <div class="hidden lg:flex items-center space-x-4 border-r border-slate-700 pr-6 mr-2">
+                <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="tel:+0123456789" class="social-icon"><i class="fa-solid fa-phone"></i></a>
+            </div>
+
+            <div class="hidden sm:flex items-center space-x-3">
+                <a href="http://127.0.0.1:5500/academy.html"><button class="btn-action bg-indigo-600 text-white">Academy</button></a>
+                <button class="btn-action border-2 border-indigo-500 text-indigo-400">Training</button>
+            </div>
+
+            <button id="menu-toggle" class="text-2xl text-white p-2">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Side Navigation Menu -->
+    <div id="overlay" class="overlay"></div>
+    <div id="mobile-menu">
+        <div class="menu-close" id="menu-close">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        
+       <a href="http://127.0.0.1:5500/index.html"> <div class="menu-link">Home</div></a>
+        <a href="http://127.0.0.1:5500/aboutUs.html"><div class="menu-link">About Us</div></a>
+        
+        <!-- Services Section -->
+        <div>
+            <div id="services-parent" class="menu-link flex justify-between items-center">
+                <a href="http://127.0.0.1:5500/sevices.html"><span>Services</span></a>
+                <i class="fa-solid fa-chevron-down text-sm" id="chevron"></i>
+            </div>
+            <div class="dropdown-container" id="services-dropdown">
+                <a href="http://127.0.0.1:5500/solutions.html" class="sub-link">Solutions</a>
+            </div>
+        </div>
+       
+       <a href="http://127.0.0.1:5500/contact.html"> <div class="menu-link">Contact Us</div></a>
+        <a href="http://127.0.0.1:5500/careers.html"><div class="menu-link">Careers</div></a>
+
+        <div id="menu-footer" class="mt-auto pt-10">
+            <p class="text-slate-500 text-xs mb-4 uppercase tracking-widest font-bold">Follow Us</p>
+            <div class="flex space-x-6">
+                <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-twitter text-xl"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-github text-xl"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACADEMY UNIVERSE SECTION -->
+      <section class="academy-universe">
+        <div id="canvas-container"></div>
+        <div class="universe-core">
+            <h1>Learn.<br><span>Build.</span><br>Become Ready.</h1>
+            <p>Experience the future of education with our immersive learning paths.</p>
+            <div class="universe-cta">
+                <a href="#courses" class="cta-main">Join Academy</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="courses-section">
+        <div class="section-header">
+            <h4>Curriculum Galaxy</h4>
+            <h2>Specialized <span>Learning Paths</span></h2>
+        </div>
+
+        <div class="courses-grid">
+            <!-- Data Science -->
+            <div class="course-card">
+                <div class="course-anim-container" id="ds-anim"></div>
+                <h3>Data Science</h3>
+                <p>Master the art of extracting insights from complex data sets using statistical analysis and visualization.</p>
+                <a href="#" class="course-link">Explore Path <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Machine Learning -->
+            <div class="course-card">
+                <div class="course-anim-container" id="ml-anim"></div>
+                <h3>Machine Learning</h3>
+                <p>Build predictive models and algorithms that learn from patterns to automate decision-making processes.</p>
+                <a href="#" class="course-link">Explore Path <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- AI -->
+            <div class="course-card">
+                <div class="course-anim-container" id="ai-anim"></div>
+                <h3>Artificial Intelligence</h3>
+                <p>Design intelligent systems capable of performing tasks that typically require human cognition.</p>
+                <a href="#" class="course-link">Explore Path <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Deep Learning -->
+            <div class="course-card">
+                <div class="course-anim-container" id="dl-anim"></div>
+                <h3>Deep Learning</h3>
+                <p>Dive into neural networks and mimics of human brain processes to solve high-complexity problems.</p>
+                <a href="#" class="course-link">Explore Path <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="placement-engine">
+        <div class="placement-header">
+            <h4>Career Outcomes</h4>
+            <h2>The Oppty <span>Placement Engine</span></h2>
+            <p>A structured circular system that drives your career forward through the tech universe.</p>
+        </div>
+
+        <div class="carousel-viewport">
+            <div class="carousel-ring" id="carousel">
+                <div class="engine-stage">
+                    <div class="stage-icon-container"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h3>Skill Mastery</h3>
+                    <p>Deep technical training with continuous assessments, ensuring strong fundamentals.</p>
+                </div>
+                <div class="engine-stage">
+                    <div class="stage-icon-container"><i class="fa-solid fa-microchip"></i></div>
+                    <h3>Project Validation</h3>
+                    <p>Live projects reviewed by mentors to validate problem-solving and coding quality.</p>
+                </div>
+                <div class="engine-stage">
+                    <div class="stage-icon-container"><i class="fa-solid fa-user-tie"></i></div>
+                    <h3>Interview Readiness</h3>
+                    <p>Resume building and mock interviews aligned with industry hiring patterns.</p>
+                </div>
+                <div class="engine-stage">
+                    <div class="stage-icon-container"><i class="fa-solid fa-handshake"></i></div>
+                    <h3>Hiring Connect</h3>
+                    <p>Profile sharing with partner companies hiring skilled professionals.</p>
+                </div>
+                <div class="engine-stage">
+                    <div class="stage-icon-container"><i class="fa-solid fa-rocket"></i></div>
+                    <h3>Career Launch</h3>
+                    <p>Successful placement into roles such as Software Developer or AI Engineer.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-nav">
+            <button class="nav-btn" onclick="rotateCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="nav-btn" onclick="rotateCarousel(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <section class="admission-gates" id="apply">
+        <div class="admission-header">
+            <h4>Admissions</h4>
+            <h2>Unlock Your <span>Academy Journey</span></h2>
+            <p>Step through our verified selection process to join the tech elite.</p>
+        </div>
+        <div class="gates-wrapper">
+            <!-- Apply Online -->
+            <div class="gate active">
+                <div class="gate-icon"><i class="fa-solid fa-file-pen"></i></div>
+                <h3>Apply Online</h3>
+                <p>Submit your application with basic details and your tech interest.</p>
+            </div>
+            <!-- Counselling -->
+            <div class="gate">
+                <div class="gate-icon"><i class="fa-solid fa-comments"></i></div>
+                <h3>Counselling</h3>
+                <p>Speak with our experts to identify the right learning path for you.</p>
+            </div>
+            <!-- Evaluation -->
+            <div class="gate">
+                <div class="gate-icon"><i class="fa-solid fa-brain"></i></div>
+                <h3>Evaluation</h3>
+                <p>A simple assessment to understand your current skill level.</p>
+            </div>
+            <!-- Enrollment -->
+            <div class="gate">
+                <div class="gate-icon"><i class="fa-solid fa-id-card"></i></div>
+                <h3>Enrollment</h3>
+                <p>Confirm your seat and gain access to structured training.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+       <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-box brand reveal">
+            <!-- Oppty Logo -->
+            <img src="./images/ChatGPT Image Jan 13, 2026, 01_30_06 PM.png"
+                 class="logo" style="border-radius: 10px;"
+                 alt="Oppty Logo"
+                 onerror="this.src='https://oppty.in/wp-content/uploads/2025/09/Oppty-Logo-1.png'">
+            <p>
+                Power up your success with innovative IT, BPO, E-commerce, Web Development, and AI solutions tailored to your vision.
+            </p>
+
+            <div class="newsletter">
+                <input type="email" placeholder="Your Email">
+                <button>Sign Up</button>
+            </div>
+        </div>
+
+        <div class="footer-box reveal">
+            <h3>HYDERABAD LOCATIONS</h3>
+            <ul>
+                <li><i class="fa fa-location-dot"></i> <span>Hyderabad - Flat number 601,<br>
+                    Mahitha’s green galaxy, CBCID <br>Colony,
+                    NRSA Colony, Bagath Singh Nagar Phase 2,
+                    Kukatpally, Hyderabad,
+                    Telangana 500085</span></li>
+                <li><i class="fa fa-envelope"></i> info@oppty.in</li>
+                <li><i class="fa fa-phone"></i> +91 012 345 6789</li>
+            </ul>
+
+            <div class="social">
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-linkedin-in"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+        </div>
+        
+        <div class="footer-box reveal">
+            <h3>UDAIPUR LOCATIONS</h3>
+            <ul>
+                <li><i class="fa fa-location-dot"></i> <span>Udaipur - Plot No: 26, 100 Feet <br>Rd,
+                    Shobhagpura, Udaipur,<br>
+                    Rajasthan 313011</span></li>
+            </ul>
+        </div>
+
+        <div class="footer-box reveal">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>Home</li>
+                <li>About Us</li>
+                <li>Our Services</li>
+                <li>Contact</li>
+                <li>Careers</li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Certification Section -->
+    <div class="cert-section reveal">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png"
+             alt="MSME" onerror="this.style.display='none'">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/Ministry-for-Corporate-AffairS-1-removebg-preview.png" 
+             alt="MCA" onerror="this.style.display='none'">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/36662669-1685562943668-bf31f5769c66e.jpg" 
+             alt="Startup India" onerror="this.style.display='none'">
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="copyright">
+        ©2025 Oppty. All Rights Reserved.
+    </div>
+
+ <script src="academy.js"></script>
+</body>
+</html>

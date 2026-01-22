@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpptyTechHub - Navigation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: white;
+            min-height: 200vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Styles */
+        nav {
+            backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid var(--glass-border);
+            animation: navSlideDown 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes navSlideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .social-icon {
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            color: #94a3b8;
+        }
+
+        .social-icon:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-action {
+            padding: 0.5rem 1.2rem;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Hamburger Animation */
+        #menu-toggle i {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+        }
+        
+        #menu-toggle:hover i, #menu-toggle.is-active i {
+            transform: rotate(90deg);
+        }
+
+        /* Mobile Menu Overlay */
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: #0f172a;
+            z-index: 100;
+            transition: right 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+            padding: 80px 40px;
+            border-left: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        #mobile-menu.active {
+            right: 0;
+        }
+
+        .menu-link {
+            display: block;
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .menu-link:hover {
+            color: var(--primary);
+        }
+
+        /* Fixed Dropdown Logic */
+        .dropdown-container {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            padding-left: 20px;
+            border-left: 2px solid var(--glass-border);
+            opacity: 0;
+            margin-bottom: 0;
+        }
+
+        .dropdown-container.show {
+            height: auto;
+            opacity: 1;
+            margin-bottom: 1.5rem;
+            padding-bottom: 10px;
+        }
+
+        .sub-link {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .sub-link:hover {
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .menu-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        .menu-close:hover { transform: rotate(90deg); color: var(--primary); }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 90;
+            backdrop-filter: blur(8px);
+        }
+        .overlay.active { display: block; }
+        
+        #chevron {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center">
+            <div class="logo-container cursor-pointer">
+                <img src="./images/ChatGPT Image Jan 13, 2026, 01_30_06 PM.png" class="logo" alt="Oppty Logo" onerror="this.src='https://via.placeholder.com/150x50/6366f1/ffffff?text=OPPTY'">
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-6">
+            <div class="hidden lg:flex items-center space-x-4 border-r border-slate-700 pr-6 mr-2">
+                <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="tel:+0123456789" class="social-icon"><i class="fa-solid fa-phone"></i></a>
+            </div>
+
+            <div class="hidden sm:flex items-center space-x-3">
+                <button class="btn-action bg-indigo-600 text-white">Academy</button>
+                <button class="btn-action border-2 border-indigo-500 text-indigo-400">Training</button>
+            </div>
+
+            <button id="menu-toggle" class="text-2xl text-white p-2">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Side Navigation Menu -->
+    <div id="overlay" class="overlay"></div>
+    <div id="mobile-menu">
+        <div class="menu-close" id="menu-close">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        
+        <div class="menu-link">Home</div>
+        <div class="menu-link">About Us</div>
+        
+        <!-- Services Section -->
+        <div>
+            <div id="services-parent" class="menu-link flex justify-between items-center">
+                <span>Services</span>
+                <i class="fa-solid fa-chevron-down text-sm" id="chevron"></i>
+            </div>
+            <div class="dropdown-container" id="services-dropdown">
+                <a href="#" class="sub-link">Solutions</a>
+            </div>
+        </div>
+       
+       <a href=""> <div class="menu-link">Contact Us</div></a>
+        <a href=""><div class="menu-link">Careers</div></a>
+
+        <div id="menu-footer" class="mt-auto pt-10">
+            <p class="text-slate-500 text-xs mb-4 uppercase tracking-widest font-bold">Follow Us</p>
+            <div class="flex space-x-6">
+                <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-twitter text-xl"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-github text-xl"></i></a>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menu-toggle');
+            const menuClose = document.getElementById('menu-close');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('overlay');
+            const servicesParent = document.getElementById('services-parent');
+            const servicesDropdown = document.getElementById('services-dropdown');
+            const chevron = document.getElementById('chevron');
+
+            const openMenu = () => {
+                mobileMenu.classList.add('active');
+                overlay.classList.add('active');
+                menuToggle.classList.add('is-active');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeMenu = () => {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                menuToggle.classList.remove('is-active');
+                servicesDropdown.classList.remove('show');
+                servicesDropdown.style.height = "0";
+                chevron.style.transform = 'rotate(0deg)';
+                document.body.style.overflow = '';
+            };
+
+            menuToggle.addEventListener('click', openMenu);
+            menuClose.addEventListener('click', closeMenu);
+            overlay.addEventListener('click', closeMenu);
+
+            servicesParent.addEventListener('click', () => {
+                const isOpening = !servicesDropdown.classList.contains('show');
+                
+                if (isOpening) {
+                    servicesDropdown.classList.add('show');
+                    // Calculate exact height for a smooth transition
+                    servicesDropdown.style.height = servicesDropdown.scrollHeight + "px";
+                    chevron.style.transform = 'rotate(180deg)';
+                    servicesParent.style.color = 'var(--primary)';
+                } else {
+                    servicesDropdown.classList.remove('show');
+                    servicesDropdown.style.height = "0";
+                    chevron.style.transform = 'rotate(0deg)';
+                    servicesParent.style.color = 'white';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

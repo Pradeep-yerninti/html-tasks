@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpptyTechHub - Navigation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="careers.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center">
+            <div class="logo-container cursor-pointer">
+                <img src="./images/ChatGPT Image Jan 13, 2026, 01_30_06 PM.png" style="border-radius: 10px;" class="logo" alt="Oppty Logo" onerror="this.src='https://via.placeholder.com/150x50/6366f1/ffffff?text=OPPTY'">
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-6">
+            <div class="hidden lg:flex items-center space-x-4 border-r border-slate-700 pr-6 mr-2">
+                <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="tel:+0123456789" class="social-icon"><i class="fa-solid fa-phone"></i></a>
+            </div>
+
+            <div class="hidden sm:flex items-center space-x-3">
+               <a href="http://127.0.0.1:5500/academy.html"> <button class="btn-action bg-indigo-600 text-white">Academy</button></a>
+                <button class="btn-action border-2 border-indigo-500 text-indigo-400">Training</button>
+            </div>
+
+            <button id="menu-toggle" class="text-2xl text-white p-2">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Side Navigation Menu -->
+    <div id="overlay" class="overlay"></div>
+    <div id="mobile-menu">
+        <div class="menu-close" id="menu-close">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        
+       <a href="http://127.0.0.1:5500/index.html"> <div class="menu-link">Home</div></a>
+        <a href="http://127.0.0.1:5500/aboutUs.html"><div class="menu-link">About Us</div></a>
+        
+        <!-- Services Section -->
+        <div>
+            <div id="services-parent" class="menu-link flex justify-between items-center">
+               <a href="http://127.0.0.1:5500/sevices.html"> <span>Services</span></a>
+                <i class="fa-solid fa-chevron-down text-sm" id="chevron"></i>
+            </div>
+            <div class="dropdown-container" id="services-dropdown">
+                <a href="http://127.0.0.1:5500/solutions.html" class="sub-link">Solutions</a>
+                
+                
+            </div>
+        </div>
+       
+        <a href="http://127.0.0.1:5500/contact.html"><div class="menu-link">Contact Us</div></a>
+        <a href="http://127.0.0.1:5500/careers.html"><div class="menu-link">Careers</div></a>
+
+        <div id="menu-footer" class="mt-auto pt-10">
+            <p class="text-slate-500 text-xs mb-4 uppercase tracking-widest font-bold">Follow Us</p>
+            <div class="flex space-x-6">
+                <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-twitter text-xl"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-github text-xl"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Careers Section with Sliding Images -->
+    <section class="video-container">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1600');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=1600');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1600');"></div>
+        </div>
+        
+        <div class="z-10 text-center px-4 max-w-4xl animate-float">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-reveal" id="hero-title">
+                Join the Future at <span class="gradient-text">Oppty TechHub</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 leading-relaxed animate-reveal" style="transition-delay: 0.2s;">
+                Launch your career with a dynamic team passionate about innovation and growth. 
+                Empowering you to shape the future in a collaborative, forward-thinking environment.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-reveal" style="transition-delay: 0.4s;">
+                <a href="#openings" class="floating-button px-8 py-4 bg-sky-500 hover:bg-sky-400 text-white rounded-full font-semibold text-lg shadow-lg">
+                    View Openings
+                </a>
+                <a href="#about" class="floating-button px-8 py-4 border border-white/20 hover:bg-white/10 text-white rounded-full font-semibold text-lg">
+                    Our Culture
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Details & Mission -->
+    <section id="about" class="py-24 px-6 bg-slate-900 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div class="animate-reveal">
+                <h2 class="text-4xl font-bold mb-6">Why Work With Us?</h2>
+                <p class="text-gray-400 mb-8 text-lg leading-relaxed">
+                    At Oppty TechHub, we don't just build software; we build the architects of tomorrow. Our mission is to bridge the gap between cutting-edge technology and real-world impact.
+                </p>
+                <ul class="space-y-6">
+                    <li class="flex items-start">
+                        <span class="bg-sky-500/10 p-2 rounded-lg text-sky-400 mr-4">✓</span>
+                        <div>
+                            <h4 class="font-semibold text-xl">Collaborative Environment</h4>
+                            <p class="text-gray-500">Work alongside industry experts in a non-hierarchical culture where your ideas matter.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-sky-500/10 p-2 rounded-lg text-sky-400 mr-4">✓</span>
+                        <div>
+                            <h4 class="font-semibold text-xl">Growth First</h4>
+                            <p class="text-gray-500">Regular hackathons, learning stipends, and dedicated mentorship to fuel your professional journey.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-sky-500/10 p-2 rounded-lg text-sky-400 mr-4">✓</span>
+                        <div>
+                            <h4 class="font-semibold text-xl">Innovative Stack</h4>
+                            <p class="text-gray-500">Get hands-on experience with AI, Blockchain, and the next generation of web technologies.</p>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="mt-12 p-6 glass-card rounded-2xl inline-block animate-float-delayed">
+                    <div class="flex items-center gap-6">
+                        <div class="text-5xl"></div>
+                        <div>
+                            <h3 class="text-3xl font-bold">100+ Projects</h3>
+                            <p class="text-gray-400">Delivered a 15+ countries.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side Image Section -->
+            <div class="relative animate-reveal group" style="transition-delay: 0.3s;">
+                <div class="relative z-10 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000" 
+                         alt="Team Collaboration" 
+                         class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+                    
+                    <div class="absolute bottom-6 left-6 right-6 p-4 glass-card rounded-xl">
+                        <p class="text-sm font-medium text-sky-400 uppercase tracking-widest mb-1">Our Studio</p>
+                        <p class="text-white text-lg font-semibold">Where innovation meets execution.</p>
+                    </div>
+                </div>
+                
+                <div class="absolute -top-10 -right-10 w-64 h-64 bg-sky-500/20 blur-3xl rounded-full"></div>
+                <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-purple-500/20 blur-3xl rounded-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Positions -->
+    <section id="openings" class="py-24 px-6 bg-slate-950">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 animate-reveal">
+                <h2 class="text-4xl font-bold mb-4">Current Opportunities</h2>
+                <p class="text-gray-400">Explore your next big move in tech and services.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-2xl animate-reveal animate-float" style="transition-delay: 0.1s; animation-duration: 5s;">
+                    <div class="w-12 h-12 bg-sky-500/20 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Web Development</h3>
+                    <p class="text-gray-500 text-sm mb-6">Create seamless, high-performance interfaces using modern frameworks.</p>
+                    <span class="text-xs font-semibold tracking-widest text-sky-400 uppercase">3 Openings</span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-2xl animate-reveal animate-float" style="transition-delay: 0.2s; animation-duration: 7s;">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">AI & Machine Learning</h3>
+                    <p class="text-gray-500 text-sm mb-6">Build intelligent systems that redefine how businesses operate.</p>
+                    <span class="text-xs font-semibold tracking-widest text-purple-400 uppercase">2 Openings</span>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-2xl animate-reveal animate-float" style="transition-delay: 0.3s; animation-duration: 6s;">
+                    <div class="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Cloud Infrastructure</h3>
+                    <p class="text-gray-500 text-sm mb-6">Design scalable and secure architectures for global deployment.</p>
+                    <span class="text-xs font-semibold tracking-widest text-emerald-400 uppercase">1 Opening</span>
+                </div>
+
+                <!-- Card 4: BPO -->
+                <div class="glass-card p-8 rounded-2xl animate-reveal animate-float" style="transition-delay: 0.4s; animation-duration: 5.5s;">
+                    <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">BPO Operations</h3>
+                    <p class="text-gray-500 text-sm mb-6">Deliver world-class support and business process solutions to global clients.</p>
+                    <span class="text-xs font-semibold tracking-widest text-orange-400 uppercase">12 Openings</span>
+                </div>
+
+                <!-- Card 5: E-commerce -->
+                <div class="glass-card p-8 rounded-2xl animate-reveal animate-float" style="transition-delay: 0.5s; animation-duration: 6.5s;">
+                    <div class="w-12 h-12 bg-pink-500/20 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">E-commerce Solutions</h3>
+                    <p class="text-gray-500 text-sm mb-6">Optimizing digital storefronts and supply chain logistics for the modern era.</p>
+                    <span class="text-xs font-semibold tracking-widest text-pink-400 uppercase">5 Openings</span>
+                </div>
+
+                <!-- Card 6: IT Services -->
+                <div class="glass-card p-8 rounded-2xl animate-reveal animate-float" style="transition-delay: 0.6s; animation-duration: 4.5s;">
+                    <div class="w-12 h-12 bg-indigo-500/20 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">IT Managed Services</h3>
+                    <p class="text-gray-500 text-sm mb-6">Provide technical consulting and infrastructure management for enterprise partners.</p>
+                    <span class="text-xs font-semibold tracking-widest text-indigo-400 uppercase">8 Openings</span>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center animate-reveal">
+                <button onclick="showMessage()" class="px-10 py-4 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform active:scale-95">
+                    Upload Resume
+                </button>
+                <p id="feedback" class="mt-4 text-sky-400 hidden">Thanks! We'll be in touch soon.</p>
+            </div>
+        </div>
+    </section>
+
+
+     <!-- Enrollment Form Section -->
+    <section id="enroll" class="relative py-24 px-6 bg-slate-950 overflow-hidden">
+        <div class="form-blob" style="top: 0; right: 0;"></div>
+        <div class="form-blob" style="bottom: 0; left: 0; animation-delay: -5s;"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="text-center mb-16 animate-reveal">
+                <h2 class="text-4xl font-bold mb-4">Enrollment <span class="gradient-text">Portal</span></h2>
+                <p class="text-gray-400">Complete the form below to begin your journey with us.</p>
+            </div>
+
+            <div id="form-main-content" class="animate-reveal">
+                <div class="form-glass-card p-8 md:p-14 shadow-2xl">
+                    <form id="form-enrollment">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                            <!-- Left Column -->
+                            <div class="space-y-8">
+                                <div class="space-y-3">
+                                    <label class="text-sm font-bold text-gray-300 flex items-center gap-2 px-1">
+                                        <i class="far fa-envelope text-sky-400"></i> Email Address*
+                                    </label>
+                                    <input type="email" name="email" required placeholder="alex@example.com" class="w-full px-6 py-4 rounded-2xl border border-white/10 bg-white/5 focus:border-sky-500 outline-none transition-all text-white">
+                                </div>
+
+                                <div class="space-y-3">
+                                    <label class="text-sm font-bold text-gray-300 px-1">Who are you?*</label>
+                                    <div class="grid grid-cols-2 p-1.5 bg-white/5 rounded-2xl border border-white/5">
+                                        <button type="button" id="form-btn-student" class="form-role-btn form-active py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2">
+                                            <i class="fas fa-graduation-cap"></i> Student
+                                        </button>
+                                        <button type="button" id="form-btn-college" class="form-role-btn py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 text-gray-500">
+                                            <i class="fas fa-university"></i> College
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <label class="text-sm font-bold text-gray-300 flex items-center gap-2 px-1">
+                                        <i class="fas fa-building text-sky-400"></i> Institution Name*
+                                    </label>
+                                    <input type="text" name="institution" required placeholder="University/College Name" class="w-full px-6 py-4 rounded-2xl border border-white/10 bg-white/5 focus:border-sky-500 outline-none transition-all text-white">
+                                </div>
+
+                                <div class="space-y-3">
+                                    <label class="text-sm font-bold text-gray-300 flex items-center gap-2 px-1">
+                                        <i class="fas fa-phone text-sky-400"></i> Phone Number*
+                                    </label>
+                                    <input type="tel" name="phone" required placeholder="+91" class="w-full px-6 py-4 rounded-2xl border border-white/10 bg-white/5 focus:border-sky-500 outline-none transition-all text-white">
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="space-y-8">
+                                <!-- Student Fields -->
+                                <div id="form-student-fields" class="space-y-8">
+                                    <div class="space-y-3">
+                                        <label class="text-sm font-bold text-gray-300">Current Year*</label>
+                                        <input type="text" name="student_year" placeholder="e.g. 3rd Year" class="form-student-input w-full px-6 py-4 rounded-2xl border border-white/10 bg-white/5 focus:border-sky-500 outline-none text-white" required>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <label class="text-sm font-bold text-gray-300">Major/Department*</label>
+                                        <input type="text" name="student_major" placeholder="e.g. CS" class="form-student-input w-full px-6 py-4 rounded-2xl border border-white/10 bg-white/5 focus:border-sky-500 outline-none text-white" required>
+                                    </div>
+                                </div>
+
+                                <!-- College Fields (Hidden) -->
+                                <div id="form-college-fields" class="space-y-8 form-hidden-section">
+                                    <div class="space-y-3">
+                                        <label class="text-sm font-bold text-gray-300">Contact Person Role*</label>
+                                        <select name="college_role" class="form-college-input w-full px-6 py-4 rounded-2xl border border-white/10 bg-slate-800 focus:border-sky-500 outline-none text-white appearance-none">
+                                            <option>Principal</option>
+                                            <option>HOD</option>
+                                            <option>TPO (Training & Placement)</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <label class="text-sm font-bold text-gray-300">Official Designation*</label>
+                                        <input type="text" name="college_designation" placeholder="e.g. Dean" class="form-college-input w-full px-6 py-4 rounded-2xl border border-white/10 bg-white/5 focus:border-sky-500 outline-none text-white">
+                                    </div>
+                                </div>
+
+                                <div class="space-y-4">
+                                    <label class="text-sm font-bold text-gray-300 block px-1">Services Needed*</label>
+                                    <div class="grid grid-cols-1 gap-3">
+                                        <label class="flex items-center gap-4 p-4 rounded-2xl border border-white/5 hover:bg-white/5 transition-all cursor-pointer">
+                                            <input type="checkbox" name="services" value="CRT" class="w-5 h-5 accent-sky-500">
+                                            <span class="text-gray-300 font-medium">CRT Training</span>
+                                        </label>
+                                        <label class="flex items-center gap-4 p-4 rounded-2xl border border-white/5 hover:bg-white/5 transition-all cursor-pointer">
+                                            <input type="checkbox" name="services" value="Technical" class="w-5 h-5 accent-sky-500">
+                                            <span class="text-gray-300 font-medium">Technical Training</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upload & Submit -->
+                        <div class="mt-12">
+                            <label class="text-sm font-bold text-gray-300 block mb-4 px-1">Upload Profile (PDF/DOC)*</label>
+                            <div class="form-upload-area rounded-[2rem] p-10 text-center relative cursor-pointer">
+                                <input type="file" name="profile_upload" required accept=".pdf,.doc,.docx" class="absolute inset-0 opacity-0 cursor-pointer">
+                                <div>
+                                    <i class="far fa-file-alt text-sky-400 text-3xl mb-4"></i>
+                                    <p class="text-white font-bold mb-1">Drop files here or click to browse</p>
+                                    <p class="text-gray-500 text-sm">Max 10MB</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-12">
+                            <button type="submit" class="w-full py-5 bg-gradient-to-r from-sky-500 to-indigo-600 text-white rounded-[2rem] font-black text-xl flex items-center justify-center gap-3 shadow-xl hover:scale-[1.02] transition-all">
+                                Enroll Now 
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Success Message -->
+            <div id="form-success-message" class="hidden max-w-md mx-auto text-center form-glass-card p-12 animate-reveal">
+                <div class="w-24 h-24 bg-sky-500/20 rounded-full flex items-center justify-center mx-auto mb-8">
+                    <i class="fas fa-check-circle text-sky-400 text-5xl"></i>
+                </div>
+                <h2 class="text-3xl font-black text-white mb-4">Application Sent!</h2>
+                <p class="text-gray-400 mb-8">Your enrollment has been successfully broadcast to our team.</p>
+                <button onclick="location.reload()" class="w-full py-4 bg-white text-slate-900 rounded-2xl font-bold">Done</button>
+            </div>
+        </div>
+    </section>
+
+
+
+        <footer class="footer">
+        <div class="footer-box brand reveal">
+            <!-- Oppty Logo -->
+            <img src="./images/ChatGPT Image Jan 13, 2026, 01_30_06 PM.png"
+                 class="logo" style="border-radius: 10px;"
+                 alt="Oppty Logo"
+                 onerror="this.src='https://oppty.in/wp-content/uploads/2025/09/Oppty-Logo-1.png'">
+            <p>
+                Power up your success with innovative IT, BPO, E-commerce, Web Development, and AI solutions tailored to your vision.
+            </p>
+
+            <div class="newsletter">
+                <input type="email" placeholder="Your Email">
+                <button>Sign Up</button>
+            </div>
+        </div>
+
+        <div class="footer-box reveal">
+            <h3>HYDERABAD LOCATIONS</h3>
+            <ul>
+                <li><i class="fa fa-location-dot"></i> <span>Hyderabad - Flat number 601,<br>
+                    Mahitha’s green galaxy, CBCID <br>Colony,
+                    NRSA Colony, Bagath Singh Nagar Phase 2,
+                    Kukatpally, Hyderabad,
+                    Telangana 500085</span></li>
+                <li><i class="fa fa-envelope"></i> info@oppty.in</li>
+                <li><i class="fa fa-phone"></i> +91 012 345 6789</li>
+            </ul>
+
+            <div class="social">
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-linkedin-in"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+        </div>
+        
+        <div class="footer-box reveal">
+            <h3>UDAIPUR LOCATIONS</h3>
+            <ul>
+                <li><i class="fa fa-location-dot"></i> <span>Udaipur - Plot No: 26, 100 Feet <br>Rd,
+                    Shobhagpura, Udaipur,<br>
+                    Rajasthan 313011</span></li>
+            </ul>
+        </div>
+
+        <div class="footer-box reveal">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>Home</li>
+                <li>About Us</li>
+                <li>Our Services</li>
+                <li>Contact</li>
+                <li>Careers</li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Certification Section -->
+    <div class="cert-section reveal">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png"
+             alt="MSME" onerror="this.style.display='none'">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/Ministry-for-Corporate-AffairS-1-removebg-preview.png" 
+             alt="MCA" onerror="this.style.display='none'">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/36662669-1685562943668-bf31f5769c66e.jpg" 
+             alt="Startup India" onerror="this.style.display='none'">
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="copyright">
+        ©2025 Oppty. All Rights Reserved.
+    </div>
+
+
+    <script src="careers.js"></script>
+</body>
+</html>

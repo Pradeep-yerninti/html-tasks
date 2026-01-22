@@ -1,0 +1,537 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpptyTechHub - Navigation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="solutions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-[#050507] text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center">
+            <div class="logo-container cursor-pointer">
+                <img src="./images/ChatGPT Image Jan 13, 2026, 01_30_06 PM.png" style="border-radius: 10px;" class="logo" alt="Oppty Logo" onerror="this.src='https://via.placeholder.com/150x50/6366f1/ffffff?text=OPPTY'">
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-6">
+            <div class="hidden lg:flex items-center space-x-4 border-r border-slate-700 pr-6 mr-2">
+                <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="tel:+0123456789" class="social-icon"><i class="fa-solid fa-phone"></i></a>
+            </div>
+
+            <div class="hidden sm:flex items-center space-x-3">
+               <a href="http://127.0.0.1:5500/academy.html"> <button class="btn-action bg-indigo-600 text-white">Academy</button></a>
+                <button class="btn-action border-2 border-indigo-500 text-indigo-400">Training</button>
+            </div>
+
+            <button id="menu-toggle" class="text-2xl text-white p-2">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Side Navigation Menu -->
+    <div id="overlay" class="overlay"></div>
+    <div id="mobile-menu">
+        <div class="menu-close" id="menu-close">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        
+       <a href="http://127.0.0.1:5500/index.html"> <div class="menu-link">Home</div></a>
+       <a href="http://127.0.0.1:5500/aboutUs.html"><div class="menu-link">About Us</div></a>
+        
+        <!-- Services Section -->
+        <div>
+            <div id="services-parent" class="menu-link flex justify-between items-center">
+                <a href="http://127.0.0.1:5500/sevices.html"><span>Services</span></a>
+                <i class="fa-solid fa-chevron-down text-sm" id="chevron"></i>
+            </div>
+            <div class="dropdown-container" id="services-dropdown">
+                <a href="http://127.0.0.1:5500/solutions.html" class="sub-link">Solutions</a>
+            </div>
+        </div>
+       
+       <a href="http://127.0.0.1:5500/contact.html"> <div class="menu-link">Contact Us</div></a>
+        <a href="http://127.0.0.1:5500/careers.html"><div class="menu-link">Careers</div></a>
+
+        <div id="menu-footer" class="mt-auto pt-10">
+            <p class="text-slate-500 text-xs mb-4 uppercase tracking-widest font-bold"></p>
+            <div class="flex space-x-6">
+              
+            </div>
+        </div>
+    </div>
+
+ <!-- Hero Feature Section -->
+    <section style="margin-top: 80px;" class="min-h-screen flex items-center justify-center p-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            <!-- Left Side: Information -->
+            <div class="space-y-8 order-2 lg:order-1 z-20">
+                <div class="inline-block px-4 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium tracking-wide">
+                    Oppty TechHub
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+                    Solutions Tailored for <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Your Success.</span>
+                </h1>
+                
+                <p class="text-gray-400 text-lg md:text-xl leading-relaxed max-w-xl">
+                    At Oppty TechHub, we deliver customized, industry-leading solutions powered by advanced technology and deep domain expertise to drive your business forward in a competitive landscape.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <button class="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-xl font-semibold transition-all shadow-lg shadow-blue-500/20 active:scale-95">
+                        Start Your Project
+                    </button>
+                    <button class="px-8 py-4 border border-blue-500/40 hover:bg-blue-500/10 text-blue-400 rounded-xl font-semibold transition-all backdrop-blur-md active:scale-95">
+                        Our Services
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Side: Interactive Image Animation -->
+            <div class="relative order-1 lg:order-2 flex justify-center items-center perspective-container py-10">
+                <div class="absolute w-[120%] h-[120%] bg-blue-600/10 rounded-full blur-[120px]"></div>
+                
+                <div id="interactive-card" class="parallax-wrapper relative w-full aspect-[4/3] max-w-[550px] ambient-animation">
+                    <div class="relative overflow-hidden rounded-2xl shadow-2xl border border-white/10 shadow-blue-500/10">
+                        <img 
+                            src="https://oppty.in/wp-content/uploads/2023/10/Services-image-slider-1.jpg" 
+                            class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700" 
+                            alt="Service Illustration"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-30"></div>
+                    </div>
+
+                    <div class="floating-layer" style="transform: translateZ(50px) scale(0.95);">
+                        <div class="absolute top-[-10%] right-[-5%] w-32 h-32 glass-overlay rounded-full animate-pulse"></div>
+                    </div>
+
+                    <div class="floating-layer" style="transform: translateZ(100px);">
+                        <div class="absolute bottom-10 left-[-10%] p-4 glass-overlay rounded-xl border border-white/20 shadow-xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-green-400 animate-ping"></div>
+                                <span class="text-xs font-mono uppercase tracking-widest text-white/80">Live Optimization</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SOLUTIONS SECTION ================= -->
+    <section class="solutions-section">
+        <div class="solutions-header">
+            <h4>System Architecture</h4>
+            <h2>Enterprise <span>Workflow Solutions</span></h2>
+            <p>
+                An interconnected ecosystem of digital products designed to move data seamlessly from entry to insight.
+            </p>
+        </div>
+
+        <div class="timeline-container">
+            <!-- Central Vertical Line -->
+            <div class="central-line">
+                <div class="line-progress"></div>
+            </div>
+
+            <!-- STEP 1: Data Visualization -->
+            <div class="timeline-item reveal">
+                <div class="timeline-left">
+                    <div class="phase-label">Intelligence</div>
+                    <h3 class="course-name">Data Visualization</h3>
+                </div>
+                <div class="timeline-dot">
+                    <div class="dot-inner"></div>
+                </div>
+                <div class="timeline-right">
+                    <div class="solution-card">
+                        <div class="flow-bg">
+                            <div class="node n1" style="top: 20%; left: 20%;"></div>
+                            <div class="line l1" style="width: 80px; transform: rotate(45deg); top: 30%; left: 25%;"></div>
+                        </div>
+                        <div class="solution-icon">📈</div>
+                        <p>Access real-time, actionable analytics to elevate performance and guide strategic choices that accelerate business growth.</p>
+                        <ul class="solution-features">
+                            <li><span>✓</span> Performance Metrics</li>
+                            <li><span>✓</span> Strategic Growth</li>
+                        </ul>
+                        <a href="#" class="solution-link">View Analytics</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 2: Advanced Analytics -->
+            <div class="timeline-item reveal">
+                <div class="timeline-left">
+                    <div class="phase-label">Insight</div>
+                    <h3 class="course-name">Advanced Analytics</h3>
+                </div>
+                <div class="timeline-dot">
+                    <div class="dot-inner"></div>
+                </div>
+                <div class="timeline-right">
+                    <div class="solution-card">
+                        <div class="flow-bg">
+                            <div class="node n2" style="top: 50%; left: 50%;"></div>
+                            <div class="line l1" style="width: 40%; top: 52%; left: 10%;"></div>
+                        </div>
+                        <div class="solution-icon">🔍</div>
+                        <p>Gain real-time, data-driven insights to enhance performance and make strategic decisions that fuel your business growth.</p>
+                        <ul class="solution-features">
+                            <li><span>✓</span> Data-Driven Insights</li>
+                            <li><span>✓</span> Real-Time Monitoring</li>
+                        </ul>
+                        <a href="#" class="solution-link">Explore Insights</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: Predictive Analytics -->
+            <div class="timeline-item reveal">
+                <div class="timeline-left">
+                    <div class="phase-label">Forecasting</div>
+                    <h3 class="course-name">Predictive Analytics</h3>
+                </div>
+                <div class="timeline-dot">
+                    <div class="dot-inner"></div>
+                </div>
+                <div class="timeline-right">
+                    <div class="solution-card">
+                        <div class="flow-bg">
+                            <div class="node n1" style="top: 10%; left: 50%;"></div>
+                            <div class="line l1" style="width: 80%; transform: rotate(90deg); top: 50%; left: 10%;"></div>
+                        </div>
+                        <div class="solution-icon">🔮</div>
+                        <p>Leverage tailored forecasting models, including customer churn and transaction risk analysis, to stay ahead of market trends.</p>
+                        <ul class="solution-features">
+                            <li><span>✓</span> Churn Analysis</li>
+                            <li><span>✓</span> Risk Assessment</li>
+                        </ul>
+                        <a href="#" class="solution-link">Start Forecasting</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4: Virtual Assistants -->
+            <div class="timeline-item reveal">
+                <div class="timeline-left">
+                    <div class="phase-label">Engagement</div>
+                    <h3 class="course-name">Virtual Assistants</h3>
+                </div>
+                <div class="timeline-dot">
+                    <div class="dot-inner"></div>
+                </div>
+                <div class="timeline-right">
+                    <div class="solution-card">
+                        <div class="flow-bg">
+                            <div class="node n3" style="top: 50%; left: 20%;"></div>
+                            <div class="line l1" style="width: 100px; transform: rotate(-20deg); top: 40%; left: 25%;"></div>
+                        </div>
+                        <div class="solution-icon">🤖</div>
+                        <p>Boost engagement with intelligent virtual agents, offering seamless, round-the-clock support for your customers’ needs.</p>
+                        <ul class="solution-features">
+                            <li><span>✓</span> 24/7 Automation</li>
+                            <li><span>✓</span> Customer Support</li>
+                        </ul>
+                        <a href="#" class="solution-link">Meet Assistants</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 5: Dashboards -->
+            <div class="timeline-item reveal">
+                <div class="timeline-left">
+                    <div class="phase-label">Interface</div>
+                    <h3 class="course-name">Dashboards</h3>
+                </div>
+                <div class="timeline-dot">
+                    <div class="dot-inner"></div>
+                </div>
+                <div class="timeline-right">
+                    <div class="solution-card">
+                        <div class="flow-bg">
+                            <div class="node n2" style="top: 40%; left: 30%;"></div>
+                            <div class="line l1" style="width: 60px; top: 42%; left: 35%;"></div>
+                        </div>
+                        <div class="solution-icon">🖥️</div>
+                        <p>Access real-time or offline dashboards customized to your industry, powered by the latest interface technologies for maximum clarity.</p>
+                        <ul class="solution-features">
+                            <li><span>✓</span> Industry Customization</li>
+                            <li><span>✓</span> Offline Access</li>
+                        </ul>
+                        <a href="#" class="solution-link">View Dashboards</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 6: Machine Learning -->
+            <div class="timeline-item reveal">
+                <div class="timeline-left">
+                    <div class="phase-label">AI Logic</div>
+                    <h3 class="course-name">Machine Learning</h3>
+                </div>
+                <div class="timeline-dot">
+                    <div class="dot-inner"></div>
+                </div>
+                <div class="timeline-right">
+                    <div class="solution-card">
+                        <div class="flow-bg">
+                            <div class="node n1" style="top: 80%; left: 10%;"></div>
+                            <div class="line l1" style="width: 120px; transform: rotate(-10deg); top: 75%; left: 15%;"></div>
+                        </div>
+                        <div class="solution-icon">🧠</div>
+                        <p>Utilize AI to discover hidden patterns, reduce risks, and achieve ongoing improvement with smart, automated solutions.</p>
+                        <ul class="solution-features">
+                            <li><span>✓</span> Pattern Discovery</li>
+                            <li><span>✓</span> Risk Reduction</li>
+                        </ul>
+                        <a href="#" class="solution-link">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 7: Text Processing -->
+            <div class="timeline-item reveal">
+                <div class="timeline-left">
+                    <div class="phase-label">Natural Language</div>
+                    <h3 class="course-name">Text Processing</h3>
+                </div>
+                <div class="timeline-dot">
+                    <div class="dot-inner"></div>
+                </div>
+                <div class="timeline-right">
+                    <div class="solution-card">
+                        <div class="flow-bg">
+                            <div class="node n3" style="top: 30%; left: 70%;"></div>
+                            <div class="line l1" style="width: 50px; transform: rotate(180deg); top: 32%; left: 55%;"></div>
+                        </div>
+                        <div class="solution-icon">📝</div>
+                        <p>Streamline your data workflows with automated text annotation, handling diverse formats and sources with precision and speed.</p>
+                        <ul class="solution-features">
+                            <li><span>✓</span> Data Annotation</li>
+                            <li><span>✓</span> Format Flexibility</li>
+                        </ul>
+                        <a href="#" class="solution-link">Explore Text Hub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 8: Chatbot Solutions -->
+            <div class="timeline-item reveal">
+                <div class="timeline-left">
+                    <div class="phase-label">Conversation</div>
+                    <h3 class="course-name">Chatbot Solutions</h3>
+                </div>
+                <div class="timeline-dot">
+                    <div class="dot-inner"></div>
+                </div>
+                <div class="timeline-right">
+                    <div class="solution-card">
+                        <div class="flow-bg">
+                            <div class="node n2" style="top: 10%; left: 10%;"></div>
+                            <div class="line l1" style="width: 200px; transform: rotate(30deg); top: 20%; left: 15%;"></div>
+                        </div>
+                        <div class="solution-icon">💬</div>
+                        <p>Boost customer satisfaction with intelligent chatbot agents that deliver personalized, efficient support for stronger connections.</p>
+                        <ul class="solution-features">
+                            <li><span>✓</span> Personalization</li>
+                            <li><span>✓</span> Efficient Support</li>
+                        </ul>
+                        <a href="#" class="solution-link">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- Innovative Solutions Section with body class and styling moved here -->
+    <section class="innovative-body text-white font-sans overflow-x-hidden antialiased py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+            <h2 class="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
+                <span class="innovative-text-gradient">Innovative Solutions</span><br>
+                <span class="text-white">for Dynamic Needs</span>
+            </h2>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                Exploring the frontiers of technology from current breakthroughs to future-defining systems.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <!-- Machine Learning -->
+            <div class="innovative-solution-card bg-slate-800/40 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 flex flex-col h-full">
+                <div class="mb-6 text-blue-400 innovative-icon-float">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m8 22 4-10 4 10"/><path d="M12 2a4 4 0 0 0-4 4c0 1 1 3 4 3s4-2 4-3a4 4 0 0 0-4-4Z"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">Machine Learning</h3>
+                <p class="text-gray-400 leading-relaxed flex-grow">Autonomous model training and deployment pipelines that evolve with your data patterns.</p>
+                <button class="mt-8 text-blue-400 font-bold text-sm inline-flex items-center group">
+                    View Models <span class="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+            </div>
+
+            <!-- Cyber Security -->
+            <div class="innovative-solution-card bg-slate-800/40 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 flex flex-col h-full">
+                <div class="mb-6 text-rose-400 innovative-icon-float" style="animation-delay: 0.5s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">Cyber Security</h3>
+                <p class="text-gray-400 leading-relaxed flex-grow">Zero-trust architecture combined with real-time biometric verification and encryption.</p>
+                <button class="mt-8 text-rose-400 font-bold text-sm inline-flex items-center group">
+                    Secure Now <span class="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+            </div>
+
+            <!-- Internet of Things -->
+            <div class="innovative-solution-card bg-slate-800/40 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 flex flex-col h-full">
+                <div class="mb-6 text-emerald-400 innovative-icon-float" style="animation-delay: 1s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-5"/><path d="M9 20v-3"/><path d="M15 20v-3"/><path d="M18 20v-4"/><path d="M6 20v-4"/><path d="M2 20v-2"/><path d="M22 20v-2"/><path d="M12 10V2"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">Internet of Things</h3>
+                <p class="text-gray-400 leading-relaxed flex-grow">Edge computing nodes that process sensory data locally for ultra-fast response times.</p>
+                <button class="mt-8 text-emerald-400 font-bold text-sm inline-flex items-center group">
+                    Sync Devices <span class="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+            </div>
+
+            <!-- Data Science -->
+            <div class="innovative-solution-card bg-slate-800/40 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 flex flex-col h-full">
+                <div class="mb-6 text-amber-400 innovative-icon-float" style="animation-delay: 1.5s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">Data Science</h3>
+                <p class="text-gray-400 leading-relaxed flex-grow">Deep analytics that bridge the gap between raw unstructured data and actionable strategy.</p>
+                <button class="mt-8 text-amber-400 font-bold text-sm inline-flex items-center group">
+                    Analyze Data <span class="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+            </div>
+
+            <!-- Quantum Computing -->
+            <div class="innovative-solution-card bg-slate-800/40 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 flex flex-col h-full">
+                <div class="mb-6 text-purple-400 innovative-icon-float" style="animation-delay: 2s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/><path d="m18 6-12 12"/><path d="m6 6 12 12"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">Quantum Computing</h3>
+                <p class="text-gray-400 leading-relaxed flex-grow">Harnessing superposition and entanglement to solve complex cryptographic problems.</p>
+                <span class="mt-8 innovative-badge inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-purple-900/40 text-purple-300 self-start border border-purple-500/30">Beta Access</span>
+            </div>
+
+            <!-- Bio-Digital Systems -->
+            <div class="innovative-solution-card bg-slate-800/40 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 flex flex-col h-full">
+                <div class="mb-6 text-teal-400 innovative-icon-float" style="animation-delay: 2.5s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">Bio-Digital Systems</h3>
+                <p class="text-gray-400 leading-relaxed flex-grow">Neural-link interfaces for seamless direct interaction between humans and digital environments.</p>
+                <span class="mt-8 innovative-badge inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-teal-900/40 text-teal-300 self-start border border-teal-500/30">Research Phase</span>
+            </div>
+
+            <!-- Web 4.0 Nodes -->
+            <div class="innovative-solution-card bg-slate-800/40 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 flex flex-col h-full">
+                <div class="mb-6 text-indigo-400 innovative-icon-float" style="animation-delay: 3s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">Web 4.0 Nodes</h3>
+                <p class="text-gray-400 leading-relaxed flex-grow">Fully decentralized mesh networks that eliminate the need for central server authorities.</p>
+                <button class="mt-8 text-indigo-400 font-bold text-sm innovative-btn inline-flex items-center group">
+                    Explore Mesh <span class="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+            </div>
+
+            <!-- Autonomous Swarms -->
+            <div class="innovative-solution-card bg-slate-800/40 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 flex flex-col h-full">
+                <div class="mb-6 text-cyan-400 innovative-icon-float" style="animation-delay: 3.5s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 9 2-9-18-9 18 9-2ZM12 19v-7"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">Autonomous Swarms</h3>
+                <p class="text-gray-400 leading-relaxed flex-grow">Collective AI intelligence for drone swarms capable of complex environmental reconstruction.</p>
+                <span class="mt-8 innovative-badge inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-cyan-900/40 text-cyan-300 self-start border border-cyan-500/30">Concept</span>
+            </div>
+        </div>
+    </section>
+
+       <footer class="footer">
+        <div class="footer-box brand reveal">
+            <!-- Oppty Logo -->
+            <img src="./images/ChatGPT Image Jan 13, 2026, 01_30_06 PM.png"
+                 class="logo"style="border-radius: 10px;"
+                 alt="Oppty Logo"
+                 onerror="this.src='https://oppty.in/wp-content/uploads/2025/09/Oppty-Logo-1.png'">
+            <p>
+                Power up your success with innovative IT, BPO, E-commerce, Web Development, and AI solutions tailored to your vision.
+            </p>
+
+            <div class="newsletter">
+                <input type="email" placeholder="Your Email">
+                <button>Sign Up</button>
+            </div>
+        </div>
+
+        <div class="footer-box reveal">
+            <h3>HYDERABAD LOCATIONS</h3>
+            <ul>
+                <li><i class="fa fa-location-dot"></i> <span>Hyderabad - Flat number 601,<br>
+                    Mahitha’s green galaxy, CBCID <br>Colony,
+                    NRSA Colony, Bagath Singh Nagar Phase 2,
+                    Kukatpally, Hyderabad,
+                    Telangana 500085</span></li>
+                <li><i class="fa fa-envelope"></i> info@oppty.in</li>
+                <li><i class="fa fa-phone"></i> +91 012 345 6789</li>
+            </ul>
+
+            <div class="social">
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-linkedin-in"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+        </div>
+        
+        <div class="footer-box reveal">
+            <h3>UDAIPUR LOCATIONS</h3>
+            <ul>
+                <li><i class="fa fa-location-dot"></i> <span>Udaipur - Plot No: 26, 100 Feet <br>Rd,
+                    Shobhagpura, Udaipur,<br>
+                    Rajasthan 313011</span></li>
+            </ul>
+        </div>
+
+        <div class="footer-box reveal">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>Home</li>
+                <li>About Us</li>
+                <li>Our Services</li>
+                <li>Contact</li>
+                <li>Careers</li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Certification Section -->
+    <div class="cert-section reveal">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png"
+             alt="MSME" onerror="this.style.display='none'">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/Ministry-for-Corporate-AffairS-1-removebg-preview.png" 
+             alt="MCA" onerror="this.style.display='none'">
+        <img src="https://oppty.in/wp-content/uploads/2025/09/36662669-1685562943668-bf31f5769c66e.jpg" 
+             alt="Startup India" onerror="this.style.display='none'">
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="copyright">
+        ©2025 Oppty. All Rights Reserved.
+    </div>
+    <script src="solutions.js"></script>
+</body>
+</html>
