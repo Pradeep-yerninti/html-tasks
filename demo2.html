@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi-Tech Electronics - Pro Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+        :root {
+            --oppty-navy: #001A33;
+    --oppty-orange:  #1E90FF;
+    --oppty-white: #F8FAFC;
+    --oppty-teal:  #154c1c;
+    --font-main: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--oppty-navy);
+            color: var(--oppty-white);
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-weight: 800;
+            font-size: 24px;
+        }
+
+        .highlight { color: var(--oppty-orange); font-style: italic; }
+
+        .search-bar {
+            display: flex;
+            flex: 1;
+            margin: 0 40px;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            outline: none;
+            color: #333;
+        }
+
+        .search-bar button {
+            background: var(--oppty-orange);
+            border: none;
+            color: white;
+            padding: 0 20px;
+            cursor: pointer;
+        }
+
+        .nav-actions { display: flex; gap: 25px; font-size: 13px; font-weight: 600; cursor: pointer; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; transition: transform 0.2s; position: relative; }
+        .nav-item i { font-size: 18px; margin-bottom: 2px; }
+        
+        /* Cart Badge */
+        .cart-count-badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: var(--oppty-orange);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        /* Cart Drawer Styles */
+        #cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            z-index: 2000;
+            transition: right 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #cart-drawer.open { right: 0; }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+            display: none;
+        }
+
+        .cart-overlay.active { display: block; }
+
+        /* Navigation */
+        .sub-nav {
+            background: white;
+            padding: 12px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .sub-nav a {
+            text-decoration: none;
+            color: var(--oppty-navy);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .sub-nav a:hover { color: var(--oppty-orange); }
+        .special-link { color: #d63384 !important; animation: pulse 1.5s infinite; }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+
+        /* Valentine Banner */
+        .valentine-banner {
+            background: linear-gradient(90deg, #b91c1c, #d63384);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 50px;
+            margin: 15px 20px;
+            border-radius: 8px;
+        }
+        .countdown { font-size: 18px; font-weight: 700; background: rgba(0,0,0,0.2); padding: 5px 15px; border-radius: 4px; }
+
+        .promo-header {
+            background: linear-gradient(135deg, #e0f2fe 0%, #fff7ed 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .the-week-text {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            color: #2563eb;
+            text-transform: uppercase;
+            -webkit-text-stroke: 2px #1e3a8a;
+            text-shadow: 4px 4px 0px #fff, 8px 8px 0px rgba(37, 99, 235, 0.2);
+            letter-spacing: -2px;
+        }
+
+        .card-gradient { background: linear-gradient(180deg, #dbeafe 0%, #ffffff 100%); }
+        .price-tag { background-color: #fbbf24; clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%); }
+
+        /* Sidebar & Filters */
+        .filter-sidebar-item:hover { color: #2563eb; background-color: #eff6ff; }
+        .filter-group-title { font-weight: 700; color: #1e293b; margin-bottom: 1rem; display: flex; align-items: center; }
+
+        /* Notifications */
+        #notification-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #d63384;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 2500;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+        /* Carousel */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 3240 / 1580;
+            background: #fff;
+            margin-bottom: 16px;
+            border-radius: 8px;
+        }
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
+        .carousel-slide { min-width: 100%; height: 100%; }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.95); border: none; padding: 20px 12px; cursor: pointer; z-index: 10; }
+        .btn-prev { left: 0; border-radius: 0 4px 4px 0; }
+        .btn-next { right: 0; border-radius: 4px 0 0 4px; }
+
+        /* Deals & Ribbon */
+        .deals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+        .deal-card { background: #fff; padding: 8px; border-radius: 4px; border: 1px solid #f9fafb; transition: transform 0.2s; display: flex; flex-direction: column; }
+        .deal-card:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .main-img { width: 100%; border-radius: 4px; }
+
+        .product-ribbon { display: grid; grid-auto-flow: column; grid-auto-columns: 80px; gap: 24px; padding: 8px; overflow-x: auto; scrollbar-width: none; }
+        .ribbon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; }
+        .ribbon-circle { width: 64px; height: 64px; background: #fff; border: 1px solid #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 8px; transition: transform 0.3s; }
+        .ribbon-item:hover .ribbon-circle { transform: scale(1.1); }
+        .ribbon-circle img { height: 48px; object-fit: contain; }
+
+        /* Bank Slider */
+        .bank-section { position: relative; overflow: hidden; border-radius: 4px; margin-top: 16px; }
+        .bank-track { display: flex; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .bank-slide { min-width: 100%; }
+        .bank-slide img { width: 100%; aspect-ratio: 4/1; object-fit: cover; }
+        .bank-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); padding: 16px; cursor: pointer; opacity: 0; transition: opacity 0.3s; z-index: 10; border: none; }
+        .bank-section:hover .bank-btn { opacity: 1; }
+        .bank-prev-btn { left: 0; border-radius: 0 4px 4px 0; }
+        .bank-next-btn { right: 0; border-radius: 4px 0 0 4px; }
+
+        footer { background: var(--oppty-navy); color: var(--oppty-white); padding: 40px 20px; margin-top: 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        
+        .loader { border: 2px solid #f3f3f3; border-top: 2px solid #f97316; border-radius: 50%; width: 16px; height: 16px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) {
+            .deals-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            #cart-drawer { width: 100%; right: -100%; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Cart Overlay & Drawer -->
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+    <div id="cart-drawer">
+        <div class="p-4 border-b flex justify-between items-center bg-slate-900 text-white">
+            <h2 class="text-xl font-bold flex items-center">
+                <i class="fa-solid fa-cart-shopping mr-2"></i> Your Cart
+            </h2>
+            <button onclick="toggleCart()" class="hover:text-orange-400">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+        </div>
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-4">
+            <div class="flex flex-col items-center justify-center h-full text-gray-400">
+                <i class="fa-solid fa-cart-arrow-down text-5xl mb-4"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="p-4 border-t bg-gray-50">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-gray-600 font-semibold">Subtotal:</span>
+                <span id="cart-subtotal" class="text-xl font-bold text-slate-900">₹0</span>
+            </div>
+            <button class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg shadow-lg">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="#">
+                <i class="fa-solid fa-bolt mr-2 text-orange-500"></i>
+                <span>Hi-Tech <span class="highlight">Electronics</span></span>
+            </a>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for smartphones, accessories...">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="nav-actions">
+            <div class="nav-item"><i class="fa-solid fa-heart"></i> <span>Wishlist</span></div>
+            <div class="nav-item" id="cart-nav-item" onclick="toggleCart()">
+                <i class="fa-solid fa-cart-shopping"></i> 
+                <span>Cart</span>
+                <div class="cart-count-badge" id="cart-count">0</div>
+            </div>
+            <div class="nav-item"><i class="fa-regular fa-user"></i> <span>Login</span></div>
+        </div>
+    </header>
+
+    <!-- Sub Navigation -->
+    <nav class="sub-nav">
+        <a href="#mobiles">Mobiles</a>
+        <a href="#laptops">Laptops</a>
+        <a href="#tvs">Smart TVs</a>
+        <a href="#audio">Audio & Video</a>
+        <a href="#accessories">Accessories</a>
+        <a href="#" class="special-link">❤️ Valentine's Deals</a>
+    </nav>
+
+    <!-- Valentine Banner -->
+    <div class="valentine-banner" id="valentines">
+        <div>
+            <h2 class="text-xl font-bold">❤️ Valentine's Super Sale ❤️</h2>
+            <p class="text-sm opacity-90">Special Offers for Best Couples! Valid until Feb 20, 2026</p>
+        </div>
+        <div class="countdown" id="timer">Ends in: 00d : 00h : 00m : 00s</div>
+    </div>
+
+    <main class="max-w-[1600px] mx-auto w-full px-4">
+        <!-- Top Banner -->
+        <section class="mt-4">
+            <img src="https://rukminim2.flixcart.com/fk-p-flap/3200/440/image/03d47bbfd6940bf1.jpg?q=60" class="w-full rounded shadow-sm">
+        </section>
+
+        <!-- Hero Slider -->
+        <section class="carousel-container mt-4">
+            <div class="carousel-track" id="heroTrack"></div>
+            <button class="carousel-btn btn-prev" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="carousel-btn btn-next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </section>
+
+        <!-- Product Grid Deals -->
+        <section class="deals-grid mt-6">
+            <div class="deal-card">
+                <img src="https://rukminim2.flixcart.com/fk-p-flap/460/224/image/655f182a32502cfc.jpg?q=80" class="main-img">
+                <div class="p-3">
+                    <h3 class="font-bold">Realme P4 Power</h3>
+                    <p class="text-orange-600 font-bold">Just ₹22,499</p>
+                    <button onclick="addToCart(901, 'Realme P4 Power', 22499, 'https://rukminim2.flixcart.com/fk-p-flap/460/224/image/655f182a32502cfc.jpg?q=80')" class="mt-2 w-full bg-slate-100 py-1 text-xs rounded font-bold hover:bg-orange-500 hover:text-white transition-all">Add to Cart</button>
+                </div>
+            </div>
+            <div class="deal-card">
+                <img src="https://rukminim2.flixcart.com/fk-p-flap/3240/2020/image/645c0281031a6fd9.jpg?q=60" class="main-img">
+                <div class="p-3">
+                    <h3 class="font-bold">Realme Savings</h3>
+                    <p class="text-orange-600 font-bold">Flat 20% Off</p>
+                </div>
+            </div>
+            <div class="deal-card">
+                <img src="https://rukminim2.flixcart.com/fk-p-flap/3240/1580/image/447a5d97a99d312d.jpg?q=60" class="main-img">
+                <div class="p-3">
+                    <h3 class="font-bold">Phone 2 Pro</h3>
+                    <p class="text-orange-600 font-bold">Just ₹17,499</p>
+                    <button onclick="addToCart(902, 'Phone 2 Pro', 17499, 'https://rukminim2.flixcart.com/fk-p-flap/3240/1580/image/447a5d97a99d312d.jpg?q=60')" class="mt-2 w-full bg-slate-100 py-1 text-xs rounded font-bold hover:bg-orange-500 hover:text-white transition-all">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Ribbon -->
+        <section class="product-ribbon mt-6 border bg-white rounded-lg">
+            <div class="ribbon-item">
+                <div class="ribbon-circle"><img src="https://cdn.bajajelectronics.com/product/BEProduction-25169.png"></div>
+                <span class="ribbon-text">iPhone</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-circle"><img src="https://bajajdigital-cdn-endpoint.azureedge.net/product/59c635da-7e8a-4803-a607-c10251daa768"></div>
+                <span class="ribbon-text">Samsung</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-circle"><img src="https://bajajdigital-cdn-endpoint.azureedge.net/product/03524f6f-a488-401c-827e-091cd6d1d1c8"></div>
+                <span class="ribbon-text">Vivo</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-circle"><img src="https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/o/s/t/-original-imah9wydbymh7gv2.jpeg?q=90"></div>
+                <span class="ribbon-text">Poco</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-circle"><img src="https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/n/o/b/-original-imahfjsftzhymazf.jpeg?q=90"></div>
+                <span class="ribbon-text">Pixel</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-circle"><img src="https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/c/0/i/-original-imahgzhp6z3vggwv.jpeg?q=90"></div>
+                <span class="ribbon-text">AI+</span>
+            </div>
+             <div class="ribbon-item">
+                <div class="ribbon-circle">
+                    <img src="https://bajajdigital-cdn-endpoint.azureedge.net/product/c84416e5-521b-427a-8b60-a7869a8829ba" alt="Product">
+                </div>
+                <span class="ribbon-text">Oppo</span>
+            </div>
+             <div class="ribbon-item">
+                <div class="ribbon-circle">
+                    <img src="https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/n/o/b/-original-imahfjsftzhymazf.jpeg?q=90" alt="Product">
+                </div>
+                <span class="ribbon-text">Google</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-circle">
+                    <img src="https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/5/d/l/-original-imahf6eg43skgx6g.jpeg?q=90" alt="Product">
+                </div>
+                <span class="ribbon-text">Tecno</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-circle">
+                    <img src="https://bajajdigital-cdn-endpoint.azureedge.net/product/57770bb3-b2d7-46c7-96e2-8ad76ad7ccea" alt="Product">
+                </div>
+                <span class="ribbon-text">Redmi</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-circle">
+                    <img src="https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/q/k/q/-original-imahj8rgvp6zwgmy.jpeg?q=90" alt="Product">
+                </div>
+                <span class="ribbon-text">realme</span>
+            </div>
+             
+             <div class="ribbon-item">
+                <div class="ribbon-circle"><img src="https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/9/k/f/-original-imahcfcfdzb4xzhk.jpeg?q=90"></div>
+                <span class="ribbon-text">Nothing</span>
+            </div>
+        </section>
+
+        <!-- Bank Slider -->
+        <section class="bank-section">
+            <div id="bank-track" class="bank-track">
+                <div class="bank-slide"><img src="https://rukminim2.flixcart.com/fk-p-flap/3240/780/image/7196b7949056ab95.jpg?q=60"></div>
+                <div class="bank-slide"><img src="https://rukminim2.flixcart.com/fk-p-flap/3240/780/image/a3b65dd267cee9ff.jpg?q=60"></div>
+                <div class="bank-slide"><img src="https://rukminim2.flixcart.com/fk-p-flap/3240/780/image/a5c5f9492efe834a.jpg?q=60"></div>
+            </div>
+            <button id="bank-prev-btn" class="bank-btn bank-prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button id="bank-next-btn" class="bank-btn bank-next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </section>
+
+        <div class="flex flex-col md:flex-row mt-8 gap-8">
+            <!-- Sidebar Filters -->
+            <aside class="w-full md:w-72 p-6 bg-white border rounded-lg h-fit sticky top-24">
+                <div class="mb-8">
+                    <h3 class="filter-group-title"><i class="fa-solid fa-indian-rupee-sign mr-2 text-blue-600"></i> Price Range</h3>
+                    <input type="range" id="filterPriceRange" min="5000" max="150000" step="1000" value="150000" class="w-full accent-orange-500">
+                    <div class="flex justify-between text-xs font-semibold mt-2">
+                        <span>Min: ₹5,000</span>
+                        <span>Max: ₹<span id="filterPriceVal">1,50,000</span></span>
+                    </div>
+                </div>
+                <div class="mb-8">
+                    <h3 class="filter-group-title"><i class="fa-solid fa-building mr-2 text-blue-600"></i> Brands</h3>
+                    <div class="space-y-2 text-sm">
+                        <label class="flex items-center space-x-2"><input type="checkbox" class="filter-brand-cb" value="Apple"> <span>Apple</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" class="filter-brand-cb" value="Samsung"> <span>Samsung</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" class="filter-brand-cb" value="OnePlus"> <span>OnePlus</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" class="filter-brand-cb" value="Google"> <span>Google</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" class="filter-brand-cb" value="Xiaomi"> <span>Xiaomi</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" class="filter-brand-cb" value="Realme"> <span>Realme</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" class="filter-brand-cb" value="Vivo"> <span>Vivo</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" class="filter-brand-cb" value="Motorola"> <span>Motorola</span></label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Listing Area -->
+            <div class="flex-1">
+                <section class="promo-header py-12 px-4 text-center rounded-lg mb-8">
+                    <h1 class="the-week-text">THE WEEK</h1>
+                    <p class="text-gray-600 mt-4 font-semibold text-lg">Unbeatable offers on latest tech</p>
+                </section>
+
+                <!-- Featured Section Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="mobileGrid">
+                    <!-- Card 1 -->
+                    <div class="mobile-card bg-white p-6 rounded-2xl border hover:shadow-xl transition-all flex flex-col items-center text-center" data-brand="Apple" data-price="119900">
+                        <img src="https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/v/2/w/-original-imahggesubmyd2ht.jpeg?q=70" class="h-40 mb-4 drop-shadow-xl">
+                        <h3 class="font-bold text-lg">iPhone 16 Pro</h3>
+                        <p class="text-blue-600 font-extrabold text-xl mt-2">₹1,19,900</p>
+                        <button onclick="addToCart(1, 'iPhone 16 Pro', 119900, 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/v/2/w/-original-imahggesubmyd2ht.jpeg?q=70')" class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700">Add to Cart</button>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="mobile-card bg-white p-6 rounded-2xl border hover:shadow-xl transition-all flex flex-col items-center text-center" data-brand="Samsung" data-price="124999">
+                        <img src="https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/t/d/o/-original-imahgfmztybfugwr.jpeg?q=70" class="h-40 mb-4 drop-shadow-xl">
+                        <h3 class="font-bold text-lg">Samsung S25 Ultra</h3>
+                        <p class="text-blue-600 font-extrabold text-xl mt-2">₹1,24,999</p>
+                        <button onclick="addToCart(2, 'Samsung S25 Ultra', 124999, 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/t/d/o/-original-imahgfmztybfugwr.jpeg?q=70')" class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700">Add to Cart</button>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="mobile-card bg-white p-6 rounded-2xl border hover:shadow-xl transition-all flex flex-col items-center text-center" data-brand="Google" data-price="99999">
+                        <img src="https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/t/b/i/-original-imahggexgphcbyja.jpeg?q=70" class="h-40 mb-4 drop-shadow-xl">
+                        <h3 class="font-bold text-lg">Pixel 9 Pro</h3>
+                        <p class="text-blue-600 font-extrabold text-xl mt-2">₹99,999</p>
+                        <button onclick="addToCart(3, 'Pixel 9 Pro', 99999, 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/t/b/i/-original-imahggexgphcbyja.jpeg?q=70')" class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700">Add to Cart</button>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="mobile-card bg-white p-6 rounded-2xl border hover:shadow-xl transition-all flex flex-col items-center text-center" data-brand="OnePlus" data-price="64999">
+                        <img src="https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/z/1/5/-original-imah8vc2a8dg7xea.jpeg?q=70" class="h-40 mb-4 drop-shadow-xl">
+                        <h3 class="font-bold text-lg">OnePlus 13</h3>
+                        <p class="text-blue-600 font-extrabold text-xl mt-2">₹64,999</p>
+                        <button onclick="addToCart(4, 'OnePlus 13', 64999, 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/z/1/5/-original-imah8vc2a8dg7xea.jpeg?q=70')" class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700">Add to Cart</button>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="mobile-card bg-white p-6 rounded-2xl border hover:shadow-xl transition-all flex flex-col items-center text-center" data-brand="Xiaomi" data-price="26999">
+                        <img src="https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/c/5/7/note-15-pro-5g-25057rn09i-redmi-original-imahk4642guqh2bf.jpeg?q=70" class="h-40 mb-4 drop-shadow-xl">
+                        <h3 class="font-bold text-lg">Redmi Note 15 Pro</h3>
+                        <p class="text-blue-600 font-extrabold text-xl mt-2">₹26,999</p>
+                        <button onclick="addToCart(5, 'Redmi Note 15 Pro', 26999, 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/c/5/7/note-15-pro-5g-25057rn09i-redmi-original-imahk4642guqh2bf.jpeg?q=70')" class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700">Add to Cart</button>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="mobile-card bg-white p-6 rounded-2xl border hover:shadow-xl transition-all flex flex-col items-center text-center" data-brand="Realme" data-price="35999">
+                        <img src="https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/m/1/7/gt-6-rmx3851-realme-original-imah2y7ewhzjpfhd.jpeg?q=70" class="h-40 mb-4 drop-shadow-xl">
+                        <h3 class="font-bold text-lg">Realme GT 6</h3>
+                        <p class="text-blue-600 font-extrabold text-xl mt-2">₹35,999</p>
+                        <button onclick="addToCart(6, 'Realme GT 6', 35999, 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/m/1/7/gt-6-rmx3851-realme-original-imah2y7ewhzjpfhd.jpeg?q=70')" class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700">Add to Cart</button>
+                    </div>
+                    <!-- Card 7 -->
+                    <div class="mobile-card bg-white p-6 rounded-2xl border hover:shadow-xl transition-all flex flex-col items-center text-center" data-brand="Vivo" data-price="74999">
+                        <img src="https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/2/m/f/-original-imahgfmshhsgvehz.jpeg?q=70" class="h-40 mb-4 drop-shadow-xl">
+                        <h3 class="font-bold text-lg">Vivo X100 Pro</h3>
+                        <p class="text-blue-600 font-extrabold text-xl mt-2">₹74,999</p>
+                        <button onclick="addToCart(7, 'Vivo X100 Pro', 74999, 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/2/m/f/-original-imahgfmshhsgvehz.jpeg?q=70')" class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700">Add to Cart</button>
+                    </div>
+                    <!-- Card 8 -->
+                    <div class="mobile-card bg-white p-6 rounded-2xl border hover:shadow-xl transition-all flex flex-col items-center text-center" data-brand="Motorola" data-price="29999">
+                        <img src="https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/o/m/y/edge-50-pb2w0002in-motorola-original-imah3ancahezgjzh.jpeg?q=70" class="h-40 mb-4 drop-shadow-xl">
+                        <h3 class="font-bold text-lg">Motorola Edge 50</h3>
+                        <p class="text-blue-600 font-extrabold text-xl mt-2">₹29,999</p>
+                        <button onclick="addToCart(8, 'Motorola Edge 50', 29999, 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/o/m/y/edge-50-pb2w0002in-motorola-original-imah3ancahezgjzh.jpeg?q=70')" class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700">Add to Cart</button>
+                    </div>
+                    <!-- Card 9 -->
+                    <div class="mobile-card bg-white p-6 rounded-2xl border hover:shadow-xl transition-all flex flex-col items-center text-center" data-brand="Apple" data-price="69999">
+                        <img src="https://m.media-amazon.com/images/I/619oqSJVY5L._AC_UY327_FMwebp_QL65_.jpg" class="h-40 mb-4 drop-shadow-xl">
+                        <h3 class="font-bold text-lg">iPhone 15</h3>
+                        <p class="text-blue-600 font-extrabold text-xl mt-2">₹69,999</p>
+                        <button onclick="addToCart(9, 'iPhone 15', 69999, 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/k/l/l/-original-imagtc5hzthymeuj.jpeg?q=70')" class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Section -->
+        <section class="py-12">
+            <h2 class="text-2xl font-bold mb-6">Recommended for you</h2>
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+            <div class="mt-8 flex justify-center">
+                <button id="load-more-btn" class="px-8 py-2 bg-white border rounded shadow-sm hover:bg-gray-50 flex items-center">
+                    <span id="btn-loader" class="loader hidden mr-2"></span>
+                    <span id="btn-text">Show more products</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-12">
+        <div class="footer-grid">
+            <div class="col">
+                <h4>Contact Us</h4>
+                <p>1800-200-TECH</p>
+                <p>help@hitech.com</p>
+            </div>
+            <div class="col">
+                <h4>Make Money</h4>
+                <a href="#">Sell on Pro Store</a>
+                <a href="#">Affiliate</a>
+            </div>
+            <div class="col">
+                <h4>Policy</h4>
+                <a href="#">Return Policy</a>
+                <a href="#">Security</a>
+            </div>
+            <div class="col">
+                <h4>Download App</h4>
+                <div class="app-buttons">
+                    <button>Google Play</button>
+                    <button>App Store</button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-10 text-slate-500 border-t border-slate-800 pt-6">
+            &copy; 2026 Hi-Tech Electronics. All rights reserved. ❤️
+        </div>
+    </footer>
+
+    <div id="notification-box">Added to Cart! 💝</div>
+
+    <script>
+        // --- DATA ---
+        const ALL_PRODUCTS = [
+            { id: 101, title: "Portronics Audio Jack Connector", image: "https://m.media-amazon.com/images/I/61Lfhj2LdxL._AC_UY327_FMwebp_QL65_.jpg", price: 199, rating: 3.8 },
+            { id: 102, title: "Ambrane Fast Charging Type C Cable", image: "https://m.media-amazon.com/images/I/61W8xeZTwxL._AC_UY327_FMwebp_QL65_.jpg", price: 149, rating: 4.0 },
+            { id: 103, title: "Samsung 25W Travel Adaptor", image: "https://m.media-amazon.com/images/I/61yxt5NjPRL._AC_UY327_FMwebp_QL65_.jpg", price: 799, rating: 4.4 },
+            { id: 104, title: "Noise Buds VS104 Earbuds", image: "https://m.media-amazon.com/images/I/51+e7yrgPpL._AC_UY327_FMwebp_QL65_.jpg", price: 1299, rating: 4.1 },
+            { id: 105, title: "Sony WH-1000XM5 Headphones", image: "https://m.media-amazon.com/images/I/61v1Rb96V+L._AC_UY327_FMwebp_QL65_.jpg", price: 29990, rating: 4.8 },
+            { id: 106, title: "MI Power Bank 3i 20000mAh", image: "https://m.media-amazon.com/images/I/61MgniaWJPL._AC_UY327_FMwebp_QL65_.jpg", price: 1999, rating: 4.3 }
+        ];
+
+        const heroImages = [
+            "https://rukminim2.flixcart.com/fk-p-flap/3240/1580/image/3067ebf010bd0157.jpg?q=60",
+            "https://rukminim2.flixcart.com/fk-p-flap/3240/1580/image/008756c45fa416d7.jpg?q=60",
+            "https://rukminim2.flixcart.com/fk-p-flap/3240/1580/image/447a5d97a99d312d.jpg?q=60"
+        ];
+
+        let cart = [];
+        let visibleCount = 4;
+
+        // --- CORE FUNCTIONS ---
+
+        function renderRecommended() {
+            const grid = document.getElementById('product-grid');
+            const productsToShow = ALL_PRODUCTS.slice(grid.children.length, visibleCount);
+            productsToShow.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white border rounded-lg p-3 hover:shadow-lg transition-all flex flex-col";
+                card.innerHTML = `
+                    <div class="h-40 flex items-center justify-center bg-gray-50 rounded mb-3"><img src="${p.image}" class="max-h-full"></div>
+                    <h3 class="text-sm font-semibold line-clamp-2 h-10">${p.title}</h3>
+                    <p class="text-lg font-bold mt-2">₹${p.price.toLocaleString('en-IN')}</p>
+                    <button onclick="addToCart(${p.id}, '${p.title.replace(/'/g, "\\'")}', ${p.price}, '${p.image}')" class="mt-auto bg-orange-500 text-white text-xs py-2 rounded font-bold hover:bg-slate-900 transition-colors">Add to Cart</button>
+                `;
+                grid.appendChild(card);
+            });
+            if (visibleCount >= ALL_PRODUCTS.length) document.getElementById('load-more-btn').style.display = 'none';
+        }
+
+        function addToCart(id, name, price, img) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ id, name, price, image: img, quantity: 1 });
+            }
+            updateCartUI();
+            showNotification(`Added ${name} to Cart!`);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countLabel = document.getElementById('cart-count');
+            const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+            countLabel.innerText = totalItems;
+
+            const container = document.getElementById('cart-items-container');
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="flex flex-col items-center justify-center h-full text-gray-400"><i class="fa-solid fa-cart-arrow-down text-5xl mb-4"></i><p>Your cart is empty</p></div>`;
+                document.getElementById('cart-subtotal').innerText = "₹0";
+                return;
+            }
+
+            let subtotal = 0;
+            container.innerHTML = cart.map(item => {
+                subtotal += (item.price * item.quantity);
+                return `
+                <div class="flex items-center gap-4 bg-white p-3 rounded-lg border">
+                    <img src="${item.image}" class="w-16 h-16 object-contain">
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold line-clamp-1">${item.name}</h4>
+                        <p class="text-xs text-gray-500">Qty: ${item.quantity}</p>
+                        <p class="text-sm font-bold text-orange-600">₹${(item.price * item.quantity).toLocaleString('en-IN')}</p>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" class="text-gray-300 hover:text-red-500"><i class="fa-solid fa-trash-can"></i></button>
+                </div>`;
+            }).join('');
+            document.getElementById('cart-subtotal').innerText = "₹" + subtotal.toLocaleString('en-IN');
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-drawer').classList.toggle('open');
+            document.getElementById('cart-overlay').classList.toggle('active');
+        }
+
+        function showNotification(msg) {
+            const box = document.getElementById('notification-box');
+            box.innerText = msg; box.style.display = 'block';
+            setTimeout(() => box.style.display = 'none', 2500);
+        }
+
+        // --- FILTER LOGIC ---
+        function filterApply() {
+            const maxPrice = parseInt(document.getElementById('filterPriceRange').value);
+            const brandCheckboxes = document.querySelectorAll('.filter-brand-cb');
+            const selectedBrands = Array.from(brandCheckboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+
+            const cards = document.querySelectorAll('.mobile-card');
+            cards.forEach(card => {
+                const cardPrice = parseInt(card.dataset.price);
+                const cardBrand = card.dataset.brand;
+                
+                const isPriceMatch = cardPrice <= maxPrice;
+                const isBrandMatch = selectedBrands.length === 0 || selectedBrands.includes(cardBrand);
+
+                if (isPriceMatch && isBrandMatch) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // --- COMPONENT INIT ---
+
+        let currentHeroSlide = 0;
+        function initCarousel() {
+            const track = document.getElementById('heroTrack');
+            heroImages.forEach(src => {
+                const s = document.createElement('div');
+                s.className = 'carousel-slide';
+                s.innerHTML = `<img src="${src}">`;
+                track.appendChild(s);
+            });
+        }
+
+        function moveSlide(dir) {
+            const track = document.getElementById('heroTrack');
+            currentHeroSlide = (currentHeroSlide + dir + heroImages.length) % heroImages.length;
+            track.style.transform = `translateX(-${currentHeroSlide * 100}%)`;
+        }
+
+        let bankIndex = 0;
+        function initBankSlider() {
+            const track = document.getElementById('bank-track');
+            const slides = track.children;
+            document.getElementById('bank-next-btn').onclick = () => {
+                bankIndex = (bankIndex + 1) % slides.length;
+                track.style.transform = `translateX(-${bankIndex * 100}%)`;
+            };
+            document.getElementById('bank-prev-btn').onclick = () => {
+                bankIndex = (bankIndex - 1 + slides.length) % slides.length;
+                track.style.transform = `translateX(-${bankIndex * 100}%)`;
+            };
+        }
+
+        function startValentineTimer() {
+            const end = new Date("Feb 20, 2026 23:59:59").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const dist = end - now;
+                if (dist < 0) return;
+                const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+                const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((dist % (1000 * 60)) / 1000);
+                document.getElementById("timer").innerHTML = `Ends in: ${d}d : ${h}h : ${m}m : ${s}s`;
+            }, 1000);
+        }
+
+        window.onload = () => {
+            initCarousel();
+            initBankSlider();
+            renderRecommended();
+            startValentineTimer();
+            setInterval(() => moveSlide(1), 5000);
+            
+            document.getElementById('load-more-btn').onclick = () => {
+                visibleCount = Math.min(visibleCount + 4, ALL_PRODUCTS.length);
+                renderRecommended();
+            };
+
+            const priceRange = document.getElementById('filterPriceRange');
+            priceRange.oninput = () => {
+                document.getElementById('filterPriceVal').innerText = parseInt(priceRange.value).toLocaleString('en-IN');
+                filterApply();
+            };
+
+            document.querySelectorAll('.filter-brand-cb').forEach(cb => {
+                cb.onchange = filterApply;
+            });
+        };
+    </script>
+</body>
+</html>
