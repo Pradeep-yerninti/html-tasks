@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Todo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .todo-container {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .todo-item {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-alert {
+            transform: translateY(-100px);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .custom-alert.show {
+            transform: translateY(0);
+        }
+
+        .line-through {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 min-h-screen flex flex-col items-center py-12 px-4 text-slate-900">
+
+    <!-- Custom Alert Notification -->
+    <div id="alertBox" class="custom-alert fixed top-6 right-6 left-6 md:left-auto md:w-96 bg-white/10 backdrop-blur-md text-white p-4 rounded-xl shadow-2xl border border-white/20 flex items-center gap-3 z-50 pointer-events-none opacity-0">
+        <i class="fas fa-triangle-exclamation text-red-300"></i>
+        <p id="alertMessage" class="font-medium flex-1"></p>
+        <button onclick="hideAlert()" class="hover:bg-white/20 p-1 rounded pointer-events-auto">
+            <i class="fas fa-xmark"></i>
+        </button>
+    </div>
+
+    <!-- Main Card -->
+    <div class="todo-container w-full max-w-lg bg-white rounded-3xl shadow-2xl shadow-black/20 overflow-hidden border border-white">
+        <!-- Colorful top accent bar -->
+        <div class="h-2 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400"></div>
+        
+        <div class="p-8">
+            <!-- Headers Centered -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-slate-800 mb-1">My Tasks</h1>
+               
+            </div>
+
+            <!-- Create Form -->
+            <form id="todoForm" class="flex gap-2 mb-8">
+                <input
+                    type="text"
+                    id="todoInput"
+                    placeholder="What needs to be done?"
+                    class="flex-1 pl-5 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all shadow-sm placeholder:text-slate-300"
+                >
+                <button 
+                    type="submit"
+                    class="px-6 bg-indigo-600 text-white rounded-2xl flex items-center gap-2 font-semibold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 active:scale-95 shrink-0"
+                >
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Add</span>
+                </button>
+            </form>
+
+            <!-- List Area -->
+            <div id="todoList" class="space-y-3 transition-all duration-300">
+                <!-- Items injected by JS -->
+            </div>
+
+            <!-- Pagination Area -->
+            <div id="pagination" class="hidden mt-8 flex items-center justify-between pt-6 border-t border-slate-100">
+                <span id="pageInfo" class="text-sm font-medium text-slate-400">Page 1 of 1</span>
+                <div class="flex gap-2">
+                    <button id="prevBtn" class="p-2 w-10 h-10 rounded-xl border border-slate-100 text-indigo-600 hover:bg-slate-50 disabled:opacity-20 transition-colors">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button id="nextBtn" class="p-2 w-10 h-10 rounded-xl border border-slate-100 text-indigo-600 hover:bg-slate-50 disabled:opacity-20 transition-colors">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8 text-center text-white/70 text-sm font-medium">
+        <p id="totalCounter" class="bg-black/10 px-4 py-2 rounded-full backdrop-blur-sm">Total Tasks: 0</p>
+    </div>
+
+    <script>
+        // State
+        let todos = [];
+        let currentPage = 1;
+        const itemsPerPage = 4;
+        let editingId = null;
+
+        // DOM Elements
+        const todoForm = document.getElementById('todoForm');
+        const todoInput = document.getElementById('todoInput');
+        const todoList = document.getElementById('todoList');
+        const pagination = document.getElementById('pagination');
+        const pageInfo = document.getElementById('pageInfo');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const totalCounter = document.getElementById('totalCounter');
+        const alertBox = document.getElementById('alertBox');
+        const alertMessage = document.getElementById('alertMessage');
+
+        // Initialize
+        function render() {
+            const totalPages = Math.ceil(todos.length / itemsPerPage);
+            if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const currentTodos = todos.slice(start, end);
+
+            // Update List
+            todoList.innerHTML = '';
+            
+            if (currentTodos.length === 0) {
+                todoList.innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-8 text-slate-300 opacity-60 italic">
+                        <i class="fas fa-list-check text-4xl mb-3"></i>
+                        <p>No tasks found...</p>
+                    </div>
+                `;
+            } else {
+                currentTodos.forEach(todo => {
+                    const isEditing = editingId === todo.id;
+                    const item = document.createElement('div');
+                    item.className = `todo-item group flex flex-col md:flex-row md:items-center justify-between p-4 rounded-2xl border transition-all duration-200 ${todo.completed ? 'bg-slate-50 border-slate-100 opacity-75' : 'bg-white border-slate-100 hover:border-indigo-200 hover:shadow-sm'}`;
+                    
+                    item.innerHTML = `
+                        <div class="flex items-center gap-3 flex-1 overflow-hidden mb-3 md:mb-0">
+                            <button onclick="toggleComplete(${todo.id})" class="flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${todo.completed ? 'bg-emerald-500 border-emerald-500 text-white shadow-lg shadow-emerald-100' : 'border-slate-200 group-hover:border-indigo-400'}">
+                                ${todo.completed ? '<i class="fas fa-check text-[10px]"></i>' : ''}
+                            </button>
+                            ${isEditing ? 
+                                `<input type="text" id="editInput-${todo.id}" value="${todo.text}" class="flex-1 bg-white border-b-2 border-indigo-500 focus:outline-none py-1 text-slate-800 font-medium" onkeydown="handleEditKey(event, ${todo.id})">` :
+                                `<span class="truncate font-medium ${todo.completed ? 'text-slate-400 line-through' : 'text-slate-700'}">${todo.text}</span>`
+                            }
+                        </div>
+                        <div class="flex items-center gap-2 justify-end">
+                            ${isEditing ? 
+                                `<button onclick="saveEdit(${todo.id})" class="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-600 font-semibold rounded-xl hover:bg-emerald-100 transition-colors">
+                                    <i class="fas fa-circle-check"></i>
+                                    <span>Save</span>
+                                </button>
+                                <button onclick="cancelEdit()" class="flex items-center gap-2 px-4 py-2 bg-slate-50 text-slate-500 font-semibold rounded-xl hover:bg-slate-100 transition-colors">
+                                    <i class="fas fa-circle-xmark"></i>
+                                    <span>Cancel</span>
+                                </button>` :
+                                `<button onclick="startEdit(${todo.id})" class="flex items-center gap-2 px-3 py-1.5 text-indigo-600 bg-indigo-50 hover:bg-indigo-100 font-semibold rounded-xl transition-colors">
+                                    <i class="fas fa-pen-to-square"></i>
+                                    <span>Edit</span>
+                                </button>
+                                 <button onclick="deleteTodo(${todo.id})" class="flex items-center gap-2 px-3 py-1.5 text-red-500 bg-red-50 hover:bg-red-100 font-semibold rounded-xl transition-colors">
+                                    <i class="fas fa-trash-can"></i>
+                                    <span>Delete</span>
+                                </button>`
+                            }
+                        </div>
+                    `;
+                    todoList.appendChild(item);
+                    if (isEditing) document.getElementById(`editInput-${todo.id}`).focus();
+                });
+            }
+
+            // Update Pagination
+            if (todos.length > itemsPerPage) {
+                pagination.classList.remove('hidden');
+                pageInfo.innerText = `Page ${currentPage} of ${totalPages}`;
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages;
+            } else {
+                pagination.classList.add('hidden');
+            }
+
+            totalCounter.innerText = `Total Tasks: ${todos.length}`;
+        }
+
+        // CRUD Functions
+        todoForm.onsubmit = (e) => {
+            e.preventDefault();
+            const text = todoInput.value.trim();
+            if (!text) {
+                showAlert("Please enter a task before adding!");
+                return;
+            }
+            todos.unshift({ id: Date.now(), text, completed: false });
+            todoInput.value = '';
+            currentPage = 1;
+            render();
+        };
+
+        function deleteTodo(id) {
+            todos = todos.filter(t => t.id !== id);
+            render();
+        }
+
+        function toggleComplete(id) {
+            todos = todos.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
+            render();
+        }
+
+        function startEdit(id) {
+            editingId = id;
+            render();
+        }
+
+        function cancelEdit() {
+            editingId = null;
+            render();
+        }
+
+        function saveEdit(id) {
+            const input = document.getElementById(`editInput-${id}`);
+            if (!input) return;
+            const newText = input.value.trim();
+            if (!newText) {
+                showAlert("Task text cannot be empty!");
+                return;
+            }
+            todos = todos.map(t => t.id === id ? { ...t, text: newText } : t);
+            editingId = null;
+            render();
+        }
+
+        function handleEditKey(e, id) {
+            if (e.key === 'Enter') saveEdit(id);
+            if (e.key === 'Escape') cancelEdit();
+        }
+
+        // Alert Helper
+        function showAlert(msg) {
+            alertMessage.innerText = msg;
+            alertBox.classList.add('show');
+            alertBox.style.opacity = "1";
+            alertBox.style.pointerEvents = "auto";
+            setTimeout(hideAlert, 3000);
+        }
+
+        function hideAlert() {
+            alertBox.classList.remove('show');
+            alertBox.style.opacity = "0";
+            alertBox.style.pointerEvents = "none";
+        }
+
+        // Pagination Listeners
+        prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; render(); } };
+        nextBtn.onclick = () => { 
+            const totalPages = Math.ceil(todos.length / itemsPerPage);
+            if (currentPage < totalPages) { currentPage++; render(); } 
+        };
+
+        // Initial Render
+        render();
+    </script>
+</body>
+</html>
