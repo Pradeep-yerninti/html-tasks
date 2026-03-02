@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Image Slider</title>
+    <style>
+        /* CSS remains mostly the same for the layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .slides-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Buttons */
+        .btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .btn:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        /* Dots */
+        .dots-container {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            border: none;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+       
+        <div class="slides-wrapper" id="slidesWrapper">
+            <div class="slide"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800" alt="Mountain"></div>
+            <div class="slide"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800" alt="Forest"></div>
+            <div class="slide"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800" alt="Sunlight"></div>
+            <div class="slide"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800" alt="Lake"></div>
+            <div class="slide"><img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800" alt="Path"></div>
+        </div>
+
+       
+        <button class="btn prev" id="prevBtn">&#10094;</button>
+        <button class="btn next" id="nextBtn">&#10095;</button>
+
+       
+        <div class="dots-container">
+            <button class="dot active"></button>
+            <button class="dot"></button>
+            <button class="dot"></button>
+            <button class="dot"></button>
+            <button class="dot"></button>
+        </div>
+    </div>
+
+    <script>
+        // Select the elements we need
+        const wrapper = document.getElementById('slidesWrapper');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const dots = document.querySelectorAll('.dot');
+        let currentIndex = 0;
+
+        
+        function updateSlider() {
+            // Move the wrapper left by 100% * current index
+            wrapper.style.transform = "translateX(" + (-currentIndex * 100) + "%)";
+
+            
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
+            }
+            dots[currentIndex].classList.add('active');
+        }
+
+        
+        nextBtn.onclick = function() {
+            currentIndex = currentIndex + 1; 
+            
+            if (currentIndex > 4) {
+                currentIndex = 0;
+            }
+            
+            updateSlider();
+        };
+
+      
+        prevBtn.onclick = function() {
+            currentIndex = currentIndex - 1; 
+            
+            
+            if (currentIndex < 0) {
+                currentIndex = 4;
+            }
+            
+            updateSlider();
+        };
+
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].onclick = function() {
+                currentIndex = i; 
+            };
+        }
+        setInterval(function() {
+            
+            nextBtn.onclick();
+        }, 3000);
+    </script>
+</body>
+</html>
