@@ -1,0 +1,128 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather</title>
+    <style>
+        body{
+            width:100%;
+            height:100vh;
+            display: flex;
+            justify-content: center;
+        }
+        .container{
+            width:300px;
+            background: linear-gradient(90deg, #00c9ff, #92fe9d);
+            padding:25px;
+            border-radius:10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .box img{
+            width:50px;
+            height:50px;
+
+        }
+        .box1 img{
+            width:120px;
+
+        }
+        .box1{
+            color:white;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+            font-size: 25px;
+            font-weight: 600;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .box{
+            color:white;
+            display: flex;
+            align-items: center;
+            gap:15px;
+            margin-bottom: 10px;
+        }
+        .weather{
+            display: flex;
+            align-items: center;
+            gap:10px;
+            margin-bottom: 20px;
+        }
+        .textInput{
+            width:200px;
+            height: 30px;
+            padding:10px;
+            border-radius:5px;
+            border:none;
+        }
+        .search{
+            width:30px;
+            height:30px;
+            cursor: pointer;
+            padding: 5px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="weather">
+            <input type="text" id="textInput" placeholder="Enter city name" class="textInput">
+            <img class="search" onclick="getWeather()" src="./images/search.png" alt="search">
+        </div>
+        <div class="searchResult" id="searchResult">
+            
+        
+        </div>
+    </div>
+
+    <script>
+        async function getWeather(){
+            const city= document.getElementById('textInput').value;
+        const ApiKey="327eec44d2518c3cf6ea3ce15085e9f7";
+        if(!city){
+            document.getElementById('searchResult').innerHTML=`<p>Please enter a city name</p>`;
+            return;
+        }
+        const weatherUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city},IN&appid=${ApiKey}&units=metric`;
+        try{
+            const response= await fetch(weatherUrl);
+            const data= await response.json();
+            // console.log(data);
+             if(data.cod!==200){
+            document.getElementById('searchResult').innerHTML=`<p>${data.message}</p>`;
+
+        }
+        const iconCode=data.weather[0].icon;
+        const iconUrl=`https://openweathermap.org/img/wn/${iconCode}.png`;
+        document.getElementById('searchResult').innerHTML=`  <div class="box1">
+                <img src="${iconUrl}" alt="${data.weather[0].main}">
+                <span>${data.name}</span>
+            </div>
+        <div class="box">
+                <img src="./images/temp1.png" alt="sun">
+                <span>Temperature: ${data.main.temp}°C</span>
+            </div>
+        <div class="box">
+                <img src="./images/wind1.png" alt="sun">
+                <span>Wind Speed: ${data.wind.speed} m/s</span>
+            </div>
+        <div class="box">
+                <img src="./images/weather1.png" alt="sun">
+                <span>Weather: ${data.weather[0].main}</span>
+            </div>
+        `;
+
+        }
+        catch(error){
+            document.getElementById('searchResult').innerHTML=`<p>Error fetching weather data. Please try again later.</p>`;
+        }
+        }
+    </script>
+</body>
+</html>
