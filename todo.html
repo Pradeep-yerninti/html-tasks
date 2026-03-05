@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Tasks - To-Do App</title>
+    <style>
+        /* --- UI STYLING --- */
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --danger: #ef4444;
+            --success: #10b981;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .app-card {
+            background: linear-gradient(135deg, #52228e 0%, #764ba2 100%);
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        h1 {
+            
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        p.subtitle {
+            
+            font-size: 0.9rem;
+        }
+
+        /* Input Section */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .field-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+        }
+
+        .add-btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Task List Area */
+        .task-container {
+            max-height: 350px;
+            overflow-y: auto;
+            margin-top: 10px;
+            padding-right: 5px;
+        }
+
+        /* Custom Scrollbar */
+        .task-container::-webkit-scrollbar {
+            width: 5px;
+        }
+        .task-container::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #f3f4f6;
+            transition: transform 0.2s;
+        }
+
+        .task-item:hover {
+            transform: scale(1.01);
+        }
+
+        .task-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .task-text {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .task-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: opacity 0.2s;
+        }
+
+        .complete-btn { background: #dcfce7; color: var(--success); }
+        .delete-btn { background: #fee2e2; color: var(--danger); }
+        .icon-btn:hover { opacity: 0.8; }
+
+        /* Statuses */
+        .completed .task-text {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        .status-msg {
+            text-align: center;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            height: 20px;
+            color: var(--danger);
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-card">
+        <header>
+            <h1>My Daily Tasks</h1>
+          
+        </header>
+
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="What needs to be done?">
+            
+            <div class="field-row">
+                <input type="date" id="taskDate">
+                <select id="taskHour">
+                    <option value="">Time</option>
+                    <option>08:00 AM</option>
+                    <option>09:00 AM</option>
+                    <option>10:00 AM</option>
+                    <option>11:00 AM</option>
+                    <option>12:00 PM</option>
+                    <option>01:00 PM</option>
+                    <option>02:00 PM</option>
+                    <option>03:00 PM</option>
+                    <option>04:00 PM</option>
+                    <option>05:00 PM</option>
+                    <option>06:00 PM</option>
+                </select>
+            </div>
+
+            <button class="add-btn" onclick="addTask()">Add Task</button>
+            <div id="statusMsg" class="status-msg">Please fill in all fields!</div>
+        </div>
+
+        <div class="task-container" id="taskList">
+            <!-- Tasks will appear here -->
+        </div>
+    </div>
+
+    <script>
+        
+        let taskListArray = JSON.parse(localStorage.getItem("my_tasks")) || [];
+
+
+        function renderTasks() {
+            const listElement = document.getElementById("taskList");
+            
+            listElement.innerHTML = "";
+
+            
+            taskListArray.forEach((task, index) => {
+               
+                const taskDiv = document.createElement("div");
+                
+                
+                taskDiv.className = `task-item ${task.done ? 'completed' : ''}`;
+
+                
+                taskDiv.innerHTML = `
+                    <div class="task-info">
+                        <span class="task-text">${task.title}</span>
+                        <span class="task-meta">${task.date} • ${task.time}</span>
+                    </div>
+                    <div class="actions">
+                        <button class="icon-btn complete-btn" onclick="toggleTask(${index})">✓</button>
+                        <button class="icon-btn delete-btn" onclick="removeTask(${index})">✕</button>
+                    </div>
+                `;
+
+                
+                listElement.appendChild(taskDiv);
+            });
+
+           
+            saveToMemory();
+        }
+
+       
+        function addTask() {
+            
+            const titleInput = document.getElementById("taskInput");
+            const dateInput = document.getElementById("taskDate");
+            const timeInput = document.getElementById("taskHour");
+            const msg = document.getElementById("statusMsg");
+
+            
+            if (!titleInput.value || !dateInput.value || !timeInput.value) {
+                msg.style.visibility = "visible";
+                setTimeout(() => msg.style.visibility = "hidden", 2000);
+                return;
+            }
+
+            
+            const newTask = {
+                title: titleInput.value,
+                date: dateInput.value,
+                time: timeInput.value,
+                done: false
+            };
+
+            
+            taskListArray.push(newTask);
+
+            
+            titleInput.value = "";
+            dateInput.value = "";
+            timeInput.value = "";
+
+            
+            renderTasks();
+        }
+
+        
+        function toggleTask(index) {
+            
+            taskListArray[index].done = !taskListArray[index].done;
+            renderTasks();
+        }
+
+      
+        function removeTask(index) {
+            
+            taskListArray.splice(index, 1);
+            renderTasks();
+        }
+
+       
+        function saveToMemory() {
+            localStorage.setItem("my_tasks", JSON.stringify(taskListArray));
+        }
+        renderTasks();
+
+    </script>
+</body>
+</html>
